@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .parent {
+            width: 200px;
+            height: 200px;
+            border: 10px solid rgba(255, 0, 0, 1);
+            padding: 15px;
+            margin: 12px;
+            background: black;
+        }
+        .relative {
+            width: 100px;
+            height: 100px;
+            background: orange;
+            position: relative;
+            border: 1px solid red;
+        }
+        .a1, .b1 {
+            position: relative;
+            background: green;
+        }
+        .a1 {
+            z-index: 2;
+        }
+        .b1 {
+            background: blue;
+            margin-top: -90px;
+            z-index: 0;
+        }
+        .a {
+            position: relative;
+            z-index: 1;
+        }
+        .b {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="a relative">
+            a
+            <div class="a1">a1</div>
+        </div>
+        <div class="b relative">
+            b
+            <div class="b1">b1</div>
+        </div>
+    </div>
+</body>
+</html>

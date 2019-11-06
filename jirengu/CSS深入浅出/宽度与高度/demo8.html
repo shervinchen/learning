@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            border: 1px solid black;
+        }
+        .son {
+            border: 15px solid red;
+            width: 100px;
+            /* height: 100px; */
+            padding: 10px;
+            margin: 10px;
+        }
+        .dad {
+            /* border: 10px solid green; */
+
+            outline: 3px solid green;
+            /* overflow: hidden; */
+            
+            /* border-top: 1px solid black;
+            border-bottom: 1px solid green; */
+            
+            /* padding-top: 10px; */
+            /* border-top: 0.1px solid green; */
+        }
+    </style>
+</head>
+<body>
+    <div class="dad">
+        text 1
+        <div class="son" style="position: fixed; background-color: blue;">
+            block 1
+        </div>
+        <div class="son" style="position: absolute; background-color: blue;">
+            block 1
+        </div>
+        <div class="son" style="float: left; background-color: blue;">
+            block 1
+        </div>
+        text 2
+        <div class="son">
+            block 2
+        </div>
+        text 3
+    </div>
+</body>
+</html>

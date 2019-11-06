@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .test1 {
+            width: 200px;
+            height: 200px;
+            border: 10px solid rgba(255, 0, 0, .5);
+            padding: 15px;
+            margin: 12px;
+            background-color: black;
+        }
+        .test2 {
+            width: 200px;
+            height: 200px;
+            border: 10px solid rgba(255, 0, 0, 1);
+            padding: 15px;
+            margin: 12px;
+            background-color: green;
+            text-indent: -20px;
+        }
+        .parent1 {
+            width: 200px;
+            height: 200px;
+            border: 10px solid rgba(255, 0, 0, 1);
+            padding: 15px;
+            margin: 12px;
+            background-color: green;
+            text-indent: -20px;
+        }
+        .child1 {
+            height: 20px;
+            background: purple;
+            margin-top: -10px;
+        }
+        .parent2 {
+            width: 200px;
+            height: 200px;
+            border: 10px solid rgba(255, 0, 0, 1);
+            padding: 15px;
+            margin: 12px;
+            background-color: green;
+            color: red;
+        }
+        .child2 {
+            height: 20px;
+            background: purple;
+            margin-top: -15px;
+            color: black;
+        }
+        .parent3 {
+            width: 200px;
+            height: 200px;
+            border: 10px solid rgba(255, 0, 0, 1);
+            padding: 15px;
+            margin: 12px;
+            /* background-color: green; */
+            /* text-indent: -10px; */
+        }
+        .child3 {
+            height: 20px;
+            background: purple;
+            color: black;
+            /* margin-top: -10px; */
+        }
+        .float {
+            width: 50px;
+            height: 30px;
+            background: blue;
+            float: left;
+            color: red;
+            /* margin-top: -10px; */
+        }
+        .relative {
+            width: 100px;
+            height: 100px;
+            /* background: black; */
+            background: orange;
+            /* margin-top: -10px; */
+            position: relative;
+            /* margin-top: -40px; */
+            /* z-index: 1; */
+        }
+        .relative2 {
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: relative;
+            margin-top: -50px;
+        }
+        .absolute {
+            width: 100px;
+            height: 100px;
+            background: orange;
+            position: absolute;
+            z-index: 1;
+        }
+        .absolute2 {
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: absolute;
+        }
+        .parent4 {
+            width: 200px;
+            height: 200px;
+            border: 10px solid rgba(255, 0, 0, 1);
+            padding: 15px;
+            margin: 12px;
+            background: black;
+        }
+        .fu {
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: relative;
+            z-index: -1;
+            margin-top: -50px;
+        }
+        .parent5 {
+            width: 200px;
+            height: 200px;
+            border: 10px solid rgba(255, 0, 0, 1);
+            padding: 15px;
+            margin: 12px;
+            background: black;
+            position: relative;
+            z-index: 0;
+            /* opacity: 0.5; */
+        }
+        .relative3 {
+            width: 100px;
+            height: 100px;
+            background: orange;
+            position: relative;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="test1"></div>
+    <div class="test2">你好</div>
+    <div class="parent1">
+        你好
+        <div class="child1">
+            
+        </div>
+    </div>
+    <div class="parent2">
+        ■■■■
+        <div class="child2">
+            ■■■■
+        </div>
+    </div>
+    <div class="parent3">
+        你好
+        <div class="float"></div>
+        <div class="child3"></div>
+    </div>
+    <div class="parent3">
+        <span>■■■■</span>
+        <div class="child3"></div>
+        <div class="relative"></div>
+        <div class="relative2"></div>
+        <div class="float">■■■■</div>
+    </div>
+    <div class="parent3">
+        <span>■■■■</span>
+        <div class="child3"></div>
+        <div class="absolute"></div>
+        <div class="absolute2"></div>
+        <div class="float">■■■■</div>
+    </div>
+    <div class="parent4">
+        <span>■■■■</span>
+        <div class="child3"></div>
+        <div class="relative"></div>
+        <div class="fu"></div>
+        <div class="float">■■■■</div>
+    </div>
+    <div class="parent5">
+        <span>■■■■</span>
+        <div class="child3"></div>
+        <div class="relative"></div>
+        <div class="fu"></div>
+        <div class="float">■■■■</div>
+    </div>
+    <div class="parent5">
+        <span>■■■■</span>
+        <div class="child3"></div>
+        <div class="relative3"></div>
+        <div class="fu"></div>
+        <div class="float">■■■■</div>
+    </div>
+</body>
+</html>
