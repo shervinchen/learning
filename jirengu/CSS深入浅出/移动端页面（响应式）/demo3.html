@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 后台代码（知乎的做法） 伪代码 -->
+    <!-- {{ if userAgent.test(/iPhone/) }}
+        {{ = render 'iphone_index.html' }}
+    {{ else }}
+        {{ = render 'pc_index.html' }} -->
+
+    <!-- 淘宝的做法（流行的） 因为淘宝pc与h5是两个部门  如果是只有一个部门 就用知乎的做法 -->
+    {{ if userAgent.test(/iPhone/) }}
+        {{ redirect_to https://m.taobao.com }}
+    {{ else }}
+        <div class="logo"></div>
+        <div class="nav2"></div>
+    
+    <!-- 大型站点一般不直接写响应式，而是用上面这两种办法直接跳转不同的页面 -->
+    <!-- 新闻站点、个人博客等简单的网站可以直接做响应式 -->
+</body>
+</html>
