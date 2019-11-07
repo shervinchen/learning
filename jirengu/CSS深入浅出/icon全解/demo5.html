@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .fdj {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid red;
+            position: relative;
+        }
+        .fdj::after {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            border-top: 1px solid red;
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+            transform: rotate(45deg);
+            margin-left: -3px;
+            margin-bottom: -1px;
+        }
+    </style>
+</head>
+<body>
+    <span class="fdj"></span>
+</body>
+</html>
