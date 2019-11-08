@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .child {
+            background: #fff;
+            margin: 1px;
+            height: 70px;
+        }
+        .parent {
+            display: flex;
+            background: #ddd;
+        }
+        .child:nth-child(1) {
+            /* flex-basis: 300px; */
+            flex: 1 2 100px;
+            order: 3;
+        }
+        .child:nth-child(2) {
+            order: 2;
+        }
+        .child:nth-child(3) {
+            order: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child">123423</div>
+        <div class="child">4343</div>
+        <div class="child">86876565656</div>
+    </div>
+</body>
+</html>
