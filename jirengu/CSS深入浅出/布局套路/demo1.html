@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .parent {
+            border: 1px solid green;
+            width: 1000px;
+            margin: 0 auto;
+        }
+        /* .child {} */
+        .child:nth-child(1) {
+            /* width: 30%; */
+            width: 200px;
+            background: red;
+        }
+        .child:nth-child(2) {
+            /* width: 70%; */
+            width: 800px;
+            background: yellow;
+        }
+        .clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .content {
+            border: 1px solid black;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent clearfix">
+        <div class="child" style="float:left;">
+            <div class="content">
+                内容1
+            </div>
+        </div>
+        <div class="child" style="float:left;">儿子2</div>
+    </div>
+</body>
+</html>

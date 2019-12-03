@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .parent {
+            margin: 0 auto;
+            background-color: #ddd;
+        }
+        /* .child {} */
+        .child:nth-child(1) {
+            width: 100px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            height: 36px;
+            line-height: 36px;
+            float:left;
+        }
+        .child:nth-child(2) {
+            float:right;
+        }
+        .parent .nav2 {
+            display: none;
+        }
+        @media (max-width: 420px) {
+            .parent .nav2 {
+                display: block;
+            }
+            .parent .nav {
+                display: none;
+            }
+        }
+        .clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .clearfix {
+            zoom: 1;
+        }
+        .content {
+            border: 1px solid black;
+            margin-right: 10px;
+        }
+        .nav {
+            line-height: 24px;
+            padding: 6px 0;
+        }
+        .navItem {
+            margin-left: 20px;
+            float: left;
+        }
+        .banner {
+            width: 800px;
+            height: 600px;
+            background: #888;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            background: transparent url(https://maxcdn.icons8.com/app/uploads/2019/06/digital-illustration-brian-edward-miller-8.jpg) no-repeat center;
+            background-size: cover;
+        }
+        @media (max-width: 420px) {
+            .banner {
+                width: auto;
+            }
+        }
+        .pictures {
+            width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        @media (max-width: 420px) {
+            .pictures {
+                width: auto;
+            }
+        }
+        .pictures > .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -4px;
+        }
+        .picture {
+            width: calc(25% - 8px);
+            height: 194px;
+            background: #ddd;
+            margin: 4px;
+        }
+        @media (max-width: 420px) {
+            .picture {
+                width: calc(50% - 8px);
+            }
+        }
+        .art {
+            background: #ddd;
+            width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        @media (max-width: 420px) {
+            .art {
+                width: auto;
+                flex-direction: column;
+            }
+        }
+        .art > .sider {
+            border: 1px solid black;
+            width: calc(33.3333% - 20px);
+            height: 300px;
+        }
+        @media (max-width: 420px) {
+            .art > .sider {
+                width: auto;
+                height: auto;
+            }
+        }
+        .art > .main {
+            border: 1px solid black;
+            width: 66.6666%;
+            height: 300px;
+        }
+        @media (max-width: 420px) {
+            .art > .main {
+                width: auto;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parent clearfix">
+        <div class="child">
+            logo
+        </div>
+        <div class="child">
+            <div class="nav clearfix">
+                <div class="navItem">导航1</div>
+                <div class="navItem">导航2</div>
+                <div class="navItem">导航3</div>
+                <div class="navItem">导航4</div>
+                <div class="navItem">导航5</div>
+            </div>
+            <div class="nav2">三</div>
+        </div>
+    </div>
+    <div class="banner"></div>
+    <div class="pictures">
+        <div class="wrapper">
+            <div class="picture"></div>
+            <div class="picture"></div>
+            <div class="picture"></div>
+            <div class="picture"></div>
+            <div class="picture"></div>
+            <div class="picture"></div>
+            <div class="picture"></div>
+        </div>
+        <!-- <div class="picture"></div> -->
+    </div>
+    <div class="art">
+        <div class="sider">
+            广告1
+        </div>
+        <div class="main">
+            广告2
+        </div>
+    </div>
+</body>
+</html>
