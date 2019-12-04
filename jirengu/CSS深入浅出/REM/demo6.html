@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            /* font-size: 页面宽度; */
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .child {
+            background: #ddd;
+        }
+        body {
+            font-size: 16px;
+        }
+        .child {
+            width: 4rem;
+            height: 2rem;
+            margin: .5rem .5rem;
+            /* 1px 不能再缩小了 所以当值太小时不用rem */
+            border: 1px solid red;
+            float: left;
+            /* rem也可以和其他单位混用 */
+            font-size: 1.2em;
+        }
+        .clearfix::after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+    </style>
+    <script>
+        var pageWidth = window.innerWidth
+        document.write(`<style>html{font-size:${pageWidth / 10}px;}</style>`)
+        // 1rem = html font-size = 1 / 100 page width
+        // vw 也是页面宽度的1/100 当 1rem = 1 / 100 page width的时候 这样就可以用rem来模拟vw
+        // 当 1rem = 1 / 100 page width时，实际页面宽度太小会导致计算出来的html font-size太小
+    </script>
+</head>
+<body>
+    <div class="parent clearfix">
+        <div class="child">box</div>
+        <div class="child">box</div>
+        <div class="child">box</div>
+        <div class="child">box</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            /* font-size: 页面宽度; */
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .child {
+            background: #ddd;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        body {
+            font-size: 16px;
+        }
+        .child {
+            width: 0.5rem;
+            height: 0.5rem;
+            margin: 0.25rem auto;
+        }
+    </style>
+    <script>
+        var pageWidth = window.innerWidth
+        document.write(`<style>html{font-size:${pageWidth}px;}</style>`)
+        // 1rem = html font-size = 1 page width
+    </script>
+</head>
+<body>
+    <div class="parent">
+        <div class="child">box</div>
+        <!-- <div class="child">box</div>
+        <div class="child">box</div>
+        <div class="child">box</div> -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+@function px2rem($px) {
+    @return $px / $designWidth * 10 + rem;
+}
+$designWidth: 640;
+
+html {
+    /* font-size: 页面宽度; */
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box;
+}
+.child {
+    background: #ddd;
+}
+body {
+    font-size: 16px;
+}
+.child {
+    width: px2rem(320);
+    height: px2rem(160);
+    margin: px2rem(40) px2rem(40);
+    /* 1px 不能再缩小了 所以当值太小时不用rem */
+    border: 1px solid red;
+    float: left;
+    /* rem也可以和其他单位混用 */
+    font-size: 1.2em;
+}
+.clearfix::after {
+    content: '';
+    clear: both;
+    display: block;
+}
