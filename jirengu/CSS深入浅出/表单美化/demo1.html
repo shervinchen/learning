@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="//at.alicdn.com/t/font_508082_xiduzmltis7wg66r.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        *::before, *::after {
+            box-sizing: border-box;
+        }
+        ul, ol {
+            list-style: none;
+        }
+        /* html {
+            height: 100%;
+        } */
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        body {
+            border: 1px solid red;
+            /* min-height: 100%; */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .wrapper {
+            display: flex;
+            position: relative;
+        }
+        .suggestion {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+        }
+        .suggestion.active {
+            display: block;
+        }
+        .input-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .float-div {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            color: #b8b8b8;
+        }
+        .float-div .split-line {
+            width: 0;
+            height: 16px;
+            border-left: 1px solid;
+            margin: 0 10px;
+        }
+        .input-wrapper {
+            float: left;
+        }
+        .input-wrapper + button {
+            float: left;
+        }
+        .input-wrapper + button {
+            background: #3988FB;
+            border: none;
+            font-size: 14px;
+            color: #fff;
+            padding: 0 20px;
+        }
+        .input-wrapper + button:focus {
+            outline: none;
+        }
+        .input-wrapper + button:hover {
+            box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, .2);
+            background: #3781F0;
+        }
+        .input-wrapper input[type=text] {
+            border: 1px solid #b8b8b8;
+            width: 540px;
+            height: 35px;
+            line-height: 35px;
+            padding-left: 8px;
+            font-size: 15px;
+        }
+        .input-wrapper input[type=text]:focus {
+            outline: none;
+            border-color: #4b94fc;
+        }
+        .input-wrapper svg.icon {
+            width: 20px;
+            height: 20px;
+            fill: #b8b8b8;
+        }
+        .input-wrapper svg.icon:hover {
+            fill: #4b94fc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <span class="input-wrapper">
+            <input id="keyword" type="text" autocomplete="off">
+            <span class="float-div">
+                <svg class="icon">
+                    <use xlink:href="#icon-microphoneicon"></use>
+                </svg>
+                <span class="split-line"></span>
+                <svg class="icon">
+                    <use xlink:href="#icon-camera"></use>
+                </svg>
+            </span>
+        </span>
+        <button>百度一下</button>
+        <ul class="suggestion" id="suggestion">
+            <li>选项1</li>
+            <li>选项2</li>
+            <li>选项3</li>
+            <li>选项4</li>
+        </ul>
+    </div>
+    <script>
+        (function() {
+            var keyword = document.querySelector('#keyword')
+            var suggestion = document.querySelector('#suggestion')
+            keyword.addEventListener('input', function(e) {
+                if (keyword.value) {
+                    suggestion.classList.add('active')
+                } else {
+                    suggestion.classList.remove('active')
+                }
+            })
+        })();
+    </script>
+</body>
+</html>
