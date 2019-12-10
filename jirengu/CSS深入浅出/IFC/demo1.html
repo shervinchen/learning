@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        span {
+            font-size: 100px;
+            border: 1px solid red;
+        }
+        span:nth-child(1) {
+            font-family: 'Georgia';
+        }
+        span:nth-child(2) {
+            font-family: 'Corbel';
+        }
+        span:nth-child(3) {
+            font-family: 'Tahoma';
+        }
+        p {
+            border: 1px solid black;
+        }
+
+        /* font-size 指定 em-square */
+        /* line-height 指定实际占地高度 */
+        /* 字体导致高度差 100px + 100px -> 103px */
+        /* 图片下面有空隙  vertical-align: top   img{display: block;} */
+        /* inline-block 有空隙 元素对不齐 用flex或float */
+    </style>
+</head>
+<body>
+    <p>
+        <span>你好B</span>
+        <span>你好B</span>
+        <span>你好B</span>
+    </p>
+</body>
+</html>
