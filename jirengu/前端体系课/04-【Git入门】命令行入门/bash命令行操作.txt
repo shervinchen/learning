@@ -1,0 +1,64 @@
+cd ~/Desktop/
+cd ~：进入用户目录
+
+1、文件的查看操作：
+pwd：查看当前目录绝对路径
+ls：查看当前目录内容
+ls 路径：查看指定目录内容
+
+查看文件内容：
+cat 路径
+head 路径
+tail 路径
+less 路径
+
+2、文件的增加操作
+touch 文件名：创建一个文件
+echo mmp > 4.txt：将mmp写入4.txt文件（>会覆盖以前的内容）
+echo mmp >> 4.txt：将mmp追加进4.txt文件
+echo -e "hehehe\n222" >> 4.txt：追加两行文件
+
+mkdir 目录名：创建一个文件夹
+mkdir -p a/b/c/d/e：创建多层目录
+touch 1.txt 2.txt：创建多个文件
+mkdir a b c：创建多个文件夹
+mkdir -p a/b/c a/d/c：创建多个多层目录
+
+cp 1.txt 2.txt：复制文件
+cp -r a b：复制文件夹
+
+3、文件的删除操作
+rm 1.txt：删除一个文件
+rm -r a：删除一个文件夹
+rm -rf a：强制删除一个文件夹
+
+4、修改文件或目录
+code 1.txt：打开文件
+start 1.txt：用默认程序打开
+echo '' > 1.txt:清空
+mv 1.txt git：将1.txt移动到git目录下
+mv 1.txt 2.txt：重命名
+
+ls -l：查看更新时间
+touch style.css：如果文件已经存在，则会修改文件最后更新时间
+
+ls --help | less：查看帮助命令
+
+npm i -g tldr
+
+tldr ls：打印出ls的常见用法
+
+
+echo $?：查看上一个命令返回的值
+rm 1.txt && echo 删除成功：&&连接的命令，前一个成功后，才会执行后一个
+
+rm 1.txt ; echo 执行完毕：;操作不管成功失败，都会执行另一条（回车也是一样的效果）
+
+alt + .：复制上一个命令
+
+chmod +x ./一键搞定（添加可执行权限）
+./一键搞定（执行这个文件里的命令）
+./一键搞定 xxx（指定目录名）
+
+sh 一键搞定 aaa（用sh后不用加./）
+加上shebang可以指定用什么程序运行当前脚本

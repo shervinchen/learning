@@ -1,0 +1,7 @@
+mkdir $1
+cd $1
+touch index.html
+touch style.css
+touch main.js
+
+echo -e "<!DOCTYPE html>\n<h1>标题</h1>" >> index.html
