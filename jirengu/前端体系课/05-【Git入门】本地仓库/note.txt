@@ -1,0 +1,32 @@
+.git目录就是本地仓库
+
+git config：配置
+
+git init：初始化，创建一个仓库
+
+.gitignore：描述哪些变动是不需要提交的
+
+git add 路径： 选择要提交的内容
+
+git commit -m 字符串：用来提交
+
+git commit -v
+
+git reset --hard xxxxxx：切换版本（xxxxxx是提交号的前6位，使用这条命令之前要保证当前的代码都提交了）
+
+git log：只会显示之前的提交
+
+git reflog：可以查看所有提交历史
+
+git branch "x"：基于当前commit创建一个新的时间线（分支）
+git checkout "x"：用于切换另一个分支
+
+git branch：查看所有分支
+
+git merge "x"：将另一个分支合并到当前分支
+
+git status -sb 查看哪个文件冲突
+
+解决文件里的冲突后，git add 对应文件，再解决其他文件的冲突，直到没有冲突，运行git commit
+
+合并完后删除无用的分支：git branch -d x
