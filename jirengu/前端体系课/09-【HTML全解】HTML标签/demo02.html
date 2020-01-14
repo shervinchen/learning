@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        *::after, *::before {
+            box-sizing: border-box;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: normal;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        ul, ol {
+            list-style: none;
+        }
+        button, input, select, textarea {
+            font: inherit;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+    </style>
+    <style>
+        h1 {
+            font-size: 48px;
+        }
+        h2 {
+            font-size: 36px;
+        }
+        .middle {
+            background: black;
+            color: white;
+        }
+        .bordered {
+            border: 10px solid red;
+        }
+        #xxx {
+            border: 10px solid yellow;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        [id=xxx] {}
+    </style>
+  </head>
+
+  <body>
+    <header tabindex="0" id="xxx" style="border: 10px solid green;" title="完整的内容">
+        <a href="http://qq.com">点击这里</a>
+        顶部广告顶部广告顶部广告顶部广告顶部广告顶部广告顶部广告顶部广告顶部广告顶部广告
+    </header>
+    <div tabindex="200" class="middle bordered" contenteditable hidden>
+      <main>
+        <h1>文章标题</h1>
+        <section>
+          <h2>第一章</h2>
+          <p>这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话</p>
+          <section>
+            <h3>1.1 节</h3>
+            <p>一段话</p>
+          </section>
+          <section>
+            <h3>1.2 节</h3>
+            <p>一段话</p>
+          </section>
+        </section>
+      </main>
+      <aside>参考资料</aside>
+    </div>
+    <footer tabindex="3">&copy;版权所有</footer>
+    <script>
+        // 不到万不得已 不使用 id 比如 parent.style.border就不生效
+        xxx.style.border = '1px solid green'
+    </script>
+  </body>
+</html>
