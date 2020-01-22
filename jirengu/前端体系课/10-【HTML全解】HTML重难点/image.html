@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 只写宽度，高度自适应；只写高度，宽度自适应 -->
+    <!-- <img id=xxx width="400" src="test.png" alt="xxx"> -->
+    <img id=xxx src="test.png" alt="xxx">
+    <script>
+        xxx.onload = function () {
+            console.log('图片加载成功')
+        }
+        xxx.onerror = function () {
+            console.log('图片加载失败')
+            xxx.src = '/404.png'
+        }
+    </script>
+</body>
+</html>

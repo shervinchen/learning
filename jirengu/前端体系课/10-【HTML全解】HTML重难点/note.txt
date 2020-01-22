@@ -1,0 +1,15 @@
+http-server . -c-1
+hs -c-1（缩写）
+parcel a-href.html
+
+form表单中必须有一个type=sumbit的元素才能出发submit事件
+
+如果不写button的type 默认为submit
+
+如果将button的type改为button 则表单不能提交
+
+button type=submit与input type=submit的区别是后者不能修改内容
+
+一般不监听input的click事件
+
+form里面的input要有name
