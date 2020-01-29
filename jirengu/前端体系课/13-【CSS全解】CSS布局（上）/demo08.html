@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            border: 1px solid red;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+        .item {
+            border: 1px solid green;
+        }
+        .item:first-child {
+            height: 200px;
+        }
+        .item:nth-child(2) {
+            height: 150px;
+        }
+        .item:nth-child(3) {
+            height: 100px;
+        }
+        .item:nth-child(4) {
+            height: 50px;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">logo</div>
+        <div class="item">导航</div>
+        <div class="item">头像</div>
+        <div class="item">用户名</div>
+    </div>
+</body>
+</html>

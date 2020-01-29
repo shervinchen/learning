@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .logo {
+            border: 1px solid red;
+            height: 40px;
+            width: 100px;
+            float: left;
+            margin-top: 5px;
+            margin-left: 10px;
+            _margin-left: 5px; /* 第一种办法：处理ie 6 7双倍 margin bug */
+            display: inline-block; /* 第二种办法：处理ie 6 7双倍 margin bug */
+        }
+        nav {
+            border: 1px solid green;
+            width: 200px;
+            height: 50px;
+            float: left;
+        }
+        .user {
+            border: 1px solid blue;
+            height: 30px;
+            float: left;
+            max-width: 100px;
+        }
+        header {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <header class="clearfix">
+        <div class="logo">XDML</div>
+        <nav>导航</nav>
+        <div class="user">我的名字</div>
+    </header>
+</body>
+</html>

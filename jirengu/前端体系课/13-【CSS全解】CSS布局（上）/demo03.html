@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul, ol {
+            list-style: none;
+        }
+        img {
+            max-width: 100%;
+        }
+        header {
+            display: block;
+        }
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .logo {
+            background: grey;
+            display: inline-block;
+            float: left;
+            margin-top: 8px;
+            margin-left: 10px;
+        }
+        .logo > img {
+            height: 26px;
+            vertical-align: top;
+        }
+        .nav {
+            float: right;
+            margin-left: 20px;
+        }
+        ul > li {
+            float: left;
+            padding: 4px 0.5em;
+            line-height: 32px;
+        }
+        ul {
+            
+            display: inline-block;
+        }
+        header {
+            background: grey;
+            color: white;
+        }
+        .content {
+            outline: 1px solid red;
+            width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .content > aside {
+            width: 200px;
+            height: 300px;
+            float: left;
+            background: #999;
+        }
+        .content > main {
+            height: 300px;
+            width: 500px;
+            float: left;
+            background: #ccc;
+        }
+        .content > .ad {
+            width: 100px;
+            height: 300px;
+            float: left;
+            background: #000;
+        }
+        .images-list {
+            outline: 1px solid green;
+            width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+        }
+        .images-list > .images-list-inner > .image {
+            width: 191px;
+            height: 191px;
+            background: #000;
+            border: 1px solid red;
+            float: left;
+            margin-bottom: 10px;
+            margin-right: 12px;
+        }
+        .images-list > .images-list-inner {
+            margin-right: -12px;
+        }
+    </style>
+</head>
+<body>
+    <header class="clearfix">
+        <div class="logo">
+            <img src="https://static.xiedaimala.com/xdml/cdn/assets/white-logo-1a762b425df663fbccee710fe08d66951cea2fbc0a0350f03446ab30462e739f.png" alt="">
+        </div>
+        <ul class="clearfix nav">
+            <li>首页</li>
+            <li>课程</li>
+            <li>优惠</li>
+            <li>关于</li>
+        </ul>
+    </header>
+    <div class="content clearfix">
+        <aside>一行有六个字</aside>
+        <main></main>
+        <div class="ad"></div>
+    </div>
+    <div class="images-list">
+        <div class="images-list-inner clearfix">
+            <div class="image"></div>
+            <div class="image"></div>
+            <div class="image"></div>
+            <div class="image"></div>
+        </div>
+    </div>
+</body>
+</html>

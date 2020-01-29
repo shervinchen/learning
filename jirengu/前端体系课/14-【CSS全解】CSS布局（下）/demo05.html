@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .demo {
+            display: inline-grid;
+            border: 1px solid red;
+            grid-template-areas: 'big middle1' 'big middle2'
+            'small1 middle2' 'small2 middle3' 'small3 middle3';
+            grid-template-rows: 240px repeat(4, 120px);
+            grid-template-columns: 250px 250px;
+        }
+        .demo > .image:first-child {
+            grid-area: big;
+            border: 1px solid red;
+        }
+        .demo > .image:nth-child(2) {
+            grid-area: small1;
+            border: 1px solid red;
+        }
+        .demo > .image:nth-child(3) {
+            grid-area: small2;
+            border: 1px solid red;
+        }
+        .demo > .image:nth-child(4) {
+            grid-area: small3;
+            border: 1px solid red;
+        }
+        .demo > .image:nth-child(5) {
+            grid-area: middle1;
+            border: 1px solid red;
+        }
+        .demo > .image:nth-child(6) {
+            grid-area: middle2;
+            border: 1px solid red;
+        }
+        .demo > .image:nth-child(7) {
+            grid-area: middle3;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo">
+        <div class="image big-image"></div>
+        <div class="image small-image"></div>
+        <div class="image small-image"></div>
+        <div class="image small-image"></div>
+        <div class="image middle-image"></div>
+        <div class="image middle-image"></div>
+        <div class="image middle-image"></div>
+    </div>
+</body>
+</html>
