@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            border: 1px solid black;
+            height: 200px;
+            background: white;
+            position: relative;
+        }
+        .a {
+            position: relative;
+            z-index: 0;
+            border: 1px solid red;
+        }
+        .a2 {
+            position: relative;
+            z-index: 10;
+            width: 50px;
+            height: 50px;
+            background: red;
+        }
+        .b {}
+        .b2 {
+            position: relative;
+            z-index: 5;
+            width: 50px;
+            height: 50px;
+            background: blue;
+            top: -20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="a">
+            1 层叠上下文
+            <div class="a2">10</div>
+        </div>
+        <div class="b">
+            <div class="b2">5</div>
+        </div>
+    </div>
+</body>
+</html>

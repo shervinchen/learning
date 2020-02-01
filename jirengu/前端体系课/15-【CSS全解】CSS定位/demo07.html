@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            border: 1px solid black;
+            height: 200px;
+            background: rgba(255, 255, 0, 0.5);
+        }
+        .relative {
+            height: 50px;
+            background: red;
+            position: relative;
+            z-index: 1;
+        }
+        .relative {
+            height: 50px;
+            background: green;
+            position: relative;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        文字
+        <div class="relative2"></div>
+    </div>
+</body>
+</html>
