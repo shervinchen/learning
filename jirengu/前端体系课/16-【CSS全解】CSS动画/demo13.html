@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #demo {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            margin: 50px;
+        }
+        #demo.start {
+            /* animation: xxx 1.5s; */
+            animation: 1.5s ease 1s infinite alternate forwards xxx;
+        }
+        @keyframes xxx {
+            0% {
+                transform: none;
+            }
+            66.66% {
+                transform: translateX(200px);
+            }
+            100% {
+                transform: translateX(200px) translateY(100px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="demo"></div>
+        <button id=button>开始</button>
+        <button id=xxx>暂停</button>
+        <button id=yyy>恢复</button>
+    </div>
+    <script>
+        button.onclick = () => {
+            demo.classList.add('start')
+        }
+        xxx.onclick = () => {
+            demo.style.animationPlayState = 'paused'
+        }
+        yyy.onclick = () => {
+            demo.style.animationPlayState = 'running'
+        }
+    </script>
+</body>
+</html>

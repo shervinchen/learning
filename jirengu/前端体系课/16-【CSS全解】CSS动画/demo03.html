@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #demo {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            transition: all 1s linear;
+        }
+        #demo.end {
+            transform: translateX(300px);
+        }
+        .other {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="demo"></div>
+        <div class="other">1</div>
+        <div class="other">2</div>
+    </div>
+    <script>
+        setTimeout(() => {
+            // demo.remove()
+            // demo.style.background = 'red'
+            demo.style.transform = 'translateX(100px)'
+        }, 3000);
+    </script>
+</body>
+</html>

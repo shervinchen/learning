@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #demo {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            transition: all 1s;
+            opacity: 1;
+        }
+        #demo.end {
+            width: 200px;
+            height: 200px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo"></div>
+    <button id="x">start</button>
+    <script>
+        x.onclick = () => {
+            demo.classList.add('end')
+        }
+        demo.addEventListener('transitionend', () => {
+            demo.remove()
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #demo {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            margin: 50px;
+            transition: transform 1s linear;
+        }
+        #demo.b {
+            transform: translateX(200px);
+        }
+        #demo.c {
+            transform: translateX(200px) translateY(100px);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="demo"></div>
+        <button id=button>开始</button>
+    </div>
+    <script>
+        button.onclick = () => {
+            demo.classList.add('b')
+            setTimeout(() => {
+                demo.classList.remove('b')
+                demo.classList.add('c')
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
