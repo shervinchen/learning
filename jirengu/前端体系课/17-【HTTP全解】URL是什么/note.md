@@ -34,6 +34,11 @@ WWW = URL + HTTP+ HTML
 - 比如http-server默认使用8080端口
 - 一个端口如果被占用，你就只能换一个端口
 
+## DNS
+
+使用命令可以查看DNS：
+nslookup baidu.com
+
 ## 域名
 
 - 一个域名可以对应不同的IP（这个叫做均衡负载，防止一台机器扛不住）
