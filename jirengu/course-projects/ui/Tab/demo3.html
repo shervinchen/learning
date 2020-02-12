@@ -96,7 +96,7 @@
                 this.bind()
             }
             init() {
-                this.$line.style.width = tihs.$$tabItems[0].offsetWidth + 'px'
+                this.$line.style.width = this.$$tabItems[0].offsetWidth + 'px'
             }
             bind() {
                 let self = this
@@ -113,9 +113,9 @@
                 })
             }
         }
-        document.querySelectorAll('.tab').forEach($container => new Tabs($container))
-        // new Tabs(document.querySelectorAll('.tab')[0])
-        // new Tabs(document.querySelectorAll('.tab')[1])
+        document.querySelectorAll('.tabs').forEach($container => new Tabs($container))
+        // new Tabs(document.querySelectorAll('.tabs')[0])
+        // new Tabs(document.querySelectorAll('.tabs')[1])
     </script>
 </body>
 </html>
