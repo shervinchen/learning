@@ -36,11 +36,11 @@ var server = http.createServer(function(request, response) {
   } else if (path === "/friends.json") {
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/json;charset=utf-8");
-    response.setHeader("Access-Control-Allow-Origin", "http://frank.com:9990");
+    response.setHeader("Access-Control-Allow-Origin", "http://frank.com:9999");
     response.write(fs.readFileSync("./public/friends.json"));
     response.end();
   } else if (path === "/friends.js") {
-    if (request.headers["referer"].indexOf("http://frank.com:9990") === 0) {
+    if (request.headers["referer"].indexOf("http://frank.com:9999") === 0) {
       response.statusCode = 200;
       response.setHeader("Content-Type", "text/javascript;charset=utf-8");
       const string = `window['{{xxx}}']({{data}}) `
