@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.0.0-beta.3/babel.min.js"></script>
+    <script type="text/babel">
+        let = 0;
+        const App = () => (
+            <div>
+                {n}
+                <button onClick={() => {
+                    n += 1
+                    render();
+                }}>
+                    +1
+                </button>    
+            </div>
+        )
+        const render = () => ReactDOM.render(<App />, document.querySelector('#root'))
+        render();
+    </script>
+</body>
+</html>
