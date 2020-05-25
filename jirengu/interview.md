@@ -825,18 +825,130 @@ react-redux 库提供的一个 API，connect 的作用是让你把组件和 stor
 - 提交的内容可以显示在另一个用户的页面上
 - 这些内容未经过滤，直接运行在另一个用户的页面上
 
-XSS (Cross Site Scripting) 即跨站脚本。比如在有表单输入的地方，用户输入了类似`<script>alert("ok")</script>`的东西，而服务器没有经过过滤就保存下来了，别的用户看到网页就会弹出提示框。当然，xss攻击还可以做其他更加复杂的事情。比如，获取cookie什么的
+XSS (Cross Site Scripting) 即跨站脚本。比如在有表单输入的地方，用户输入了类似`<script>alert("ok")</script>`的东西，而服务器没有经过过滤就保存下来了，别的用户看到网页就会弹出提示框。当然，xss 攻击还可以做其他更加复杂的事情。比如，获取 cookie 什么的
 
-把"<"和">"转换为html字符实体可以防范大多数xss攻击。可以使用js过滤，也可以在服务器端过滤
+把"<"和">"转换为 html 字符实体可以防范大多数 xss 攻击。可以使用 js 过滤，也可以在服务器端过滤
 
 2、必考：什么是 CSRF？如何预防？
 
-CSRF (Cross Site Request Forgery)攻击，中文名：跨站请求伪造。其原理是攻击者构造网站后台某个功能接口的请求地址，诱导用户去点击或者用特殊方法让该请求地址自动加载。用户在登录状态下这个请求被服务端接收后会被误以为是用户合法的操作。对于 GET 形式的接口地址可轻易被攻击，对于 POST 形式的接口地址也不是百分百安全，攻击者可诱导用户进入带 Form 表单可用POST方式提交参数的页面
+CSRF (Cross Site Request Forgery)攻击，中文名：跨站请求伪造。其原理是攻击者构造网站后台某个功能接口的请求地址，诱导用户去点击或者用特殊方法让该请求地址自动加载。用户在登录状态下这个请求被服务端接收后会被误以为是用户合法的操作。对于 GET 形式的接口地址可轻易被攻击，对于 POST 形式的接口地址也不是百分百安全，攻击者可诱导用户进入带 Form 表单可用 POST 方式提交参数的页面
 
-客户端防范：对于数据库的修改请求，全部使用POST提交，禁止使用GET请求
-服务器端防范：一般的做法是在表单里面添加一段隐藏的唯一的token(请求令牌)
+客户端防范：对于数据库的修改请求，全部使用 POST 提交，禁止使用 GET 请求
+服务器端防范：一般的做法是在表单里面添加一段隐藏的唯一的 token(请求令牌)
 
 - 服务端在收到路由请求时，生成一个随机数，在渲染请求页面时把随机数埋入页面（一般埋入 form 表单内，`<input type="hidden" name="_csrf_token" value="xxxx">`）
-- 服务端设置setCookie，把该随机数作为cookie或者session种入用户浏览器
-- 当用户发送 GET 或者 POST 请求时带上_csrf_token参数（对于 Form 表单直接提交即可，因为会自动把当前表单内所有的 input 提交给后台，包括_csrf_token）
-- 后台在接受到请求后解析请求的cookie获取_csrf_token的值，然后和用户请求提交的_csrf_token做个比较，如果相等表示请求是合法的
+- 服务端设置 setCookie，把该随机数作为 cookie 或者 session 种入用户浏览器
+- 当用户发送 GET 或者 POST 请求时带上\_csrf_token 参数（对于 Form 表单直接提交即可，因为会自动把当前表单内所有的 input 提交给后台，包括\_csrf_token）
+- 后台在接受到请求后解析请求的 cookie 获取\_csrf_token 的值，然后和用户请求提交的\_csrf_token 做个比较，如果相等表示请求是合法的
+
+## 第十一部分：算法
+
+1、排序算法
+
+参考：https://github.com/hustcc/JS-Sorting-Algorithm
+
+- 冒泡排序
+
+算法步骤：
+
+1. 比较相邻的元素。如果第一个比第二个大，就交换它们两个
+2. 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数
+3. 针对所有的元素重复以上的步骤，除了最后一个
+4. 重复步骤 1~3，直到排序完成
+
+JavaScript 代码实现：
+
+```javascript
+function bubbleSort(arr) {
+  var len = arr.length;
+  for (var i = 0; i < len - 1; i++) {
+    for (var j = 0; j < len - 1 - i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        // 相邻元素两两对比
+        var temp = arr[j + 1]; // 元素交换
+        arr[j + 1] = arr[j];
+        arr[j] = temp;
+      }
+    }
+  }
+  return arr;
+}
+```
+
+- 选择排序
+
+算法步骤：
+
+1. 首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置
+2. 再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾
+3. 重复第二步，直到所有元素均排序完毕
+
+JavaScript 代码实现：
+
+```javascript
+function selectionSort(arr) {
+  var len = arr.length;
+  var minIndex, temp;
+  for (var i = 0; i < len - 1; i++) {
+    minIndex = i;
+    for (var j = i + 1; j < len; j++) {
+      if (arr[j] < arr[minIndex]) {
+        // 寻找最小的数
+        minIndex = j; // 将最小数的索引保存
+      }
+    }
+    temp = arr[i];
+    arr[i] = arr[minIndex];
+    arr[minIndex] = temp;
+  }
+  return arr;
+}
+```
+
+2、二分查找
+
+二分法查找又称折半查找，需要数据排好顺序
+
+1. 首先，从有序数组的中间的元素开始搜索，如果该元素正好是目标元素（即要查找的元素），则搜索过程结束，否则进行下一步
+2. 如果目标元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半区域查找，然后重复第一步的操作
+3. 如果某一步数组为空，则表示找不到目标元素
+
+```javascript
+// arr为已按"升序排列"的数组，key为要查询的元素
+// 返回目标元素的下标
+
+// 非递归算法
+function binarySearch(arr, key) {
+  let low = 0;
+  let high = arr.length - 1;
+  while (low <= high) {
+    let mid = parseInt((high + low) / 2);
+    if (key === arr[mid]) {
+      return mid;
+    } else if (key > arr[mid]) {
+      low = mid + 1;
+    } else if (key < arr[mid]) {
+      high = mid - 1;
+    } else {
+      return -1;
+    }
+  }
+}
+// 递归算法
+function binarySearch(arr, low, high, key) {
+  if (low > high) {
+    return -1;
+  }
+  let mid = parseInt((high + low) / 2);
+  if (arr[mid] === key) {
+    return mid;
+  } else if (arr[mid] > key) {
+    high = mid - 1;
+    return binarySearch(arr, low, high, key);
+  } else if (arr[mid] < key) {
+    low = mid + 1;
+    return binarySearch(arr, low, high, key);
+  }
+}
+```
+
