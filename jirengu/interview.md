@@ -489,12 +489,12 @@ function uniqueArray(arr) {
 }
 
 function uniqueArray2(arr) {
-  return arr.filter(function(item, index, arr) {
+  return arr.filter(function (item, index, arr) {
     return arr.indexOf(item) === index;
   });
 }
 
-[...new Set(arr)]
+[...new Set(arr)];
 ```
 
 13、放弃：== 相关题目（反着答）
@@ -503,11 +503,77 @@ function uniqueArray2(arr) {
 
 14、送命题：手写一个 Promise
 
-放弃，可以去看看别人的实现，然后说说promise的大概原理
+放弃，可以去看看别人的实现，然后说说 promise 的大概原理
 
 ## 第四部分：DOM
 
+1、必考：事件委托
 
+- 错误版（但是可能能过）
 
+```javascript
+ul.addEventListener("click", function (e) {
+  if (e.target.tagName.toLowerCase() === "li") {
+    fn(); // 执行某个函数
+  }
+});
+```
 
+bug 在于，如果用户点击的是 li 里面的 span，就没法触发 fn，这显然不对
+
+- 高级版
+
+```javascript
+function delegate(element, eventType, selector, fn) {
+  element.addEventListener(eventType, (e) => {
+    let el = e.target;
+    while (!el.matches(selector)) {
+      if (element === el) {
+        el = null;
+        break;
+      }
+      el = el.parentNode;
+    }
+    el && fn.call(el, e, el);
+  });
+  return element;
+}
+```
+
+思路是点击 span 后，递归遍历 span 的祖先元素看其中有没有 ul 里面的 li
+
+2、用 mouse 事件写一个可拖曳的 div
+
+```html
+<div id="element"></div>
+```
+
+```javascript
+var dragging = false;
+var position = null;
+
+element.addEventListener("mousedown", function (e) {
+  dragging = true;
+  position = [e.clientX, e.clientY];
+});
+
+document.addEventListener("mousemove", function (e) {
+  if (dragging) {
+    var x = e.clientX;
+    var y = e.clientY;
+    var deltaX = x - position[0];
+    var deltaY = y - position[1];
+    var left = parseInt(element.style.left || 0);
+    var top = parseInt(element.style.top || 0);
+    element.style.left = left + deltaX + "px";
+    element.style.top = top + deltaY + "px";
+    position = [x, y];
+  }
+});
+document.addEventListener("mouseup", function (e) {
+  dragging = false;
+});
+```
+
+第五部分：HTTP
 
