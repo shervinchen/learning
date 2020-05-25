@@ -584,10 +584,10 @@ document.addEventListener("mouseup", function (e) {
 - 4xx 表示浏览器方面出错
 - 5xx 表示服务器方面出错
 
-常见的HTTP状态码：
+常见的 HTTP 状态码：
 
 - 200 - 请求成功
-- 301 - 资源（网页等）被永久转移到其它URL
+- 301 - 资源（网页等）被永久转移到其它 URL
 - 404 - 请求的资源（网页等）不存在
 - 500 - 内部服务器错误
 
@@ -596,22 +596,23 @@ document.addEventListener("mouseup", function (e) {
 - 需要详细的了解 ETag、CacheControl、Expires 的异同
 - 参考 https://imweb.io/topic/5795dcb6fb312541492eda8c
 - 答题要点：
-  - ETag 是通过对比浏览器和服务器资源的特征值（如MD5）来决定是否要发送文件内容，如果一样就只发送 304（not modified）
+  - ETag 是通过对比浏览器和服务器资源的特征值（如 MD5）来决定是否要发送文件内容，如果一样就只发送 304（not modified）
   - Expires 是设置过期时间（绝对时间），但是如果用户的本地时间错乱了，可能会有问题
   - CacheControl: max-age=3600 是设置过期时长（相对时间），跟本地时间无关。
 
 3、必考：GET 和 POST 的区别
 
 - 错解，但是能过面试
-  - GET在浏览器回退时是无害的，而POST会再次提交请求。
-  - GET产生的URL地址可以被加入收藏栏，而POST不可以。
-  - GET请求会被浏览器主动cache，而POST不会，除非手动设置。
-  - GET请求只能进行url编码，而POST支持多种编码方式。
-  - GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。
-  - GET请求在URL中传送的参数是有长度限制的，而POST么有。
-  - 对参数的数据类型，GET只接受ASCII字符，而POST没有限制。
-  - GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。
-  - GET参数通过URL传递，POST放在Request body中。
+
+  - GET 在浏览器回退时是无害的，而 POST 会再次提交请求。
+  - GET 产生的 URL 地址可以被加入收藏栏，而 POST 不可以。
+  - GET 请求会被浏览器主动 cache，而 POST 不会，除非手动设置。
+  - GET 请求只能进行 url 编码，而 POST 支持多种编码方式。
+  - GET 请求参数会被完整保留在浏览器历史记录里，而 POST 中的参数不会被保留。
+  - GET 请求在 URL 中传送的参数是有长度限制的，而 POST 么有。
+  - 对参数的数据类型，GET 只接受 ASCII 字符，而 POST 没有限制。
+  - GET 比 POST 更不安全，因为参数直接暴露在 URL 上，所以不能用来传递敏感信息。
+  - GET 参数通过 URL 传递，POST 放在 Request body 中。
 
 - 正解：就一个区别，语义——GET 用于获取资源，POST 用于提交资源
 
@@ -649,7 +650,7 @@ beforeCreate created beforeMount mounted beforeUpdate updated beforeDestroy dest
 
 - 父子组件：使用 v-on 通过事件通信
 - 爷孙组件：使用两次 v-on 通过爷爷爸爸通信，爸爸儿子通信实现爷孙通信
-- 任意组件：使用 `eventBus = new Vue()` 来通信，`eventBus.$on` 和 `eventBus.$emit` 是主要API
+- 任意组件：使用 `eventBus = new Vue()` 来通信，`eventBus.$on` 和 `eventBus.$emit` 是主要 API
 - 任意组件：使用 Vuex 通信
 
 4、必考：Vue 数据响应式怎么做到的？
@@ -657,7 +658,7 @@ beforeCreate created beforeMount mounted beforeUpdate updated beforeDestroy dest
 - 答案在文档[深入响应式原理](https://cn.vuejs.org/v2/guide/reactivity.html)
 - 要点
   - 使用 Object.defineProperty 把这些属性全部转为 getter/setter
-  - Vue 不能检测到对象属性的添加或删除，解决方法是手动调用 Vue.set 或者 this.$set
+  - Vue 不能检测到对象属性的添加或删除，解决方法是手动调用 Vue.set 或者 this.\$set
 
 5、必考：Vue.set 是做什么用的？
 
@@ -679,13 +680,13 @@ beforeCreate created beforeMount mounted beforeUpdate updated beforeDestroy dest
 - 说出常用 API：
   - router-link
   - router-view
-  - this.$router.push
-  - this.$router.replace
-  - this.$route.params
+  - this.\$router.push
+  - this.\$router.replace
+  - this.\$route.params
 
 ```javascript
-this.$router.push('/user-admin')
-this.$route.params
+this.$router.push("/user-admin");
+this.$route.params;
 ```
 
 8、路由守卫（导航守卫）是什么？
@@ -695,3 +696,71 @@ this.$route.params
 > 简单的说，导航守卫就是路由跳转过程中的一些钩子函数。路由跳转是一个大的过程，这个大的过程分为跳转前中后等等细小的过程，在每一个过程中都有一函数，这个函数能让你操作一些其他的事儿，这就是导航守卫。类似于组件生命周期钩子函数
 
 ## 第七部分：React
+
+1、必考：受控组件 V.S. 非受控组件
+
+```javascript
+<Input value={x} onChange={fn}/> // 受控组件
+<Input defaultValue={x} ref={input}/> // 非受控组件
+```
+
+区别：受控组件的状态由开发者维护，非受控组件的状态由组件自身维护（不受开发者控制）
+
+2、必考：React 有哪些生命周期函数？分别有什么用？（Ajax 请求放在哪个阶段？）
+
+答题思路跟 Vue 的一样：
+
+- 钩子在文档里，蓝色框框里面的都是生命周期钩子
+- 把名字翻译一遍就是满分
+- 要特别说明哪个钩子里请求数据，答案是 componentDidMount
+
+参考答案：
+
+- constructor：组件构造函数，第一个被执行
+- render：React中最核心的方法，一个组件中必须要有这个方法
+- componentDidMount：组件装载之后调用，此时我们可以获取到DOM节点并操作，比如对canvas，svg的操作，服务器请求，订阅都可以写在这个里面，但是记得在componentWillUnmount中取消订阅
+- componentDidUpdate：在这个函数里我们可以操作DOM，和发起服务器请求，还可以setState，但是注意一定要用if语句控制，否则会导致无限循环
+- componentWillUnmount：当我们的组件被卸载或者销毁了就会调用，我们可以在这个函数里去清除一些定时器，取消网络请求，清理无效的DOM元素等垃圾清理工作
+
+3、必考：React 如何实现组件间通信？
+
+- 父子靠 props 传函数
+- 爷孙可以穿两次 props
+- 任意组件用 Redux（也可以自己写一个 eventBus）
+
+4、必考：shouldComponentUpdate 有什么用？
+
+- 要点：用于在没有必要更新 UI 的时候返回 false，以提高渲染性能
+- 参考：http://taobaofed.org/blog/2016/08/12/optimized-react-components/
+
+5、必考：虚拟 DOM 是什么？
+
+- 要点：虚拟 DOM 就是用来模拟 DOM 的一个对象，这个对象拥有一些重要属性，并且更新 UI 主要就是通过对比（DIFF）旧的虚拟 DOM 树 和新的虚拟 DOM 树的区别完成的。
+- 参考：http://www.alloyteam.com/2015/10/react-virtual-analysis-of-the-dom/
+
+6、必考：什么是高阶组件？
+
+- 要点：文档原话——高阶组件就是一个函数，且该函数接受一个组件作为参数，并返回一个新的组件。
+- 举例：React-Redux 里 connect 就是一个高阶组件，比如 connect(mapState)(MyComponent) 接受组件 MyComponent，返回一个具有状态的新 MyComponent 组件。
+
+7、React diff 的原理是什么？
+
+虚拟 Dom 算法的实现是以下三步：
+
+- 通过 JS 来模拟生成虚拟 Dom 树
+- 判断两个树的差异
+- 渲染差异
+
+8、必考 Redux 是什么？
+
+- 背下文档第一句：Redux 是 JavaScript 状态容器，提供可预测化的状态管理。重点是『状态管理』。
+- 说出核心概念的名字和作用：Action/Reducer/Store/单向数据流
+- 说出常用 API：store.dispatch(action)/store.getState()
+
+9、connect 的原理是什么？
+
+react-redux 库提供的一个 API，connect 的作用是让你把组件和store连接起来，产生一个新的组件（connect 是高阶组件）
+参考：https://segmentfault.com/a/1190000017064759
+
+第八部分：TypeScript
+
