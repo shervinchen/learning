@@ -644,8 +644,6 @@ beforeCreate created beforeMount mounted beforeUpdate updated beforeDestroy dest
 - 把名字翻译一遍就是满分
 - 要特别说明哪个钩子里请求数据，答案是 mounted
 
-![vue](https://cn.vuejs.org/images/lifecycle.png)
-
 3、必考：Vue 如何实现组件间通信？
 
 - 父子组件：使用 v-on 通过事件通信
