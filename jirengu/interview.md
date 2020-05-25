@@ -628,4 +628,70 @@ document.addEventListener("mouseup", function (e) {
 
 ## 第六部分：Vue
 
+1、必考：watch 和 computed 和 methods 区别是什么？
 
+- 思路：先翻译单词，再阐述作用，最后强行找不同。
+- 要点：
+  - computed 和 methods 相比，最大区别是 computed 有缓存：如果 computed 属性依赖的属性没有变化，那么 computed 属性就不会重新计算。methods 则是看到一次计算一次。
+  - watch 和 computed 相比，computed 是计算出一个属性（废话），而 watch 则可能是做别的事情（如上报数据）
+
+2、必考：Vue 有哪些生命周期钩子函数？分别有什么用？
+
+beforeCreate created beforeMount mounted beforeUpdate updated beforeDestroy destroyed
+
+- 钩子在文档全都有，看红色的字
+- 把名字翻译一遍就是满分
+- 要特别说明哪个钩子里请求数据，答案是 mounted
+
+![vue](https://cn.vuejs.org/images/lifecycle.png)
+
+3、必考：Vue 如何实现组件间通信？
+
+- 父子组件：使用 v-on 通过事件通信
+- 爷孙组件：使用两次 v-on 通过爷爷爸爸通信，爸爸儿子通信实现爷孙通信
+- 任意组件：使用 `eventBus = new Vue()` 来通信，`eventBus.$on` 和 `eventBus.$emit` 是主要API
+- 任意组件：使用 Vuex 通信
+
+4、必考：Vue 数据响应式怎么做到的？
+
+- 答案在文档[深入响应式原理](https://cn.vuejs.org/v2/guide/reactivity.html)
+- 要点
+  - 使用 Object.defineProperty 把这些属性全部转为 getter/setter
+  - Vue 不能检测到对象属性的添加或删除，解决方法是手动调用 Vue.set 或者 this.$set
+
+5、必考：Vue.set 是做什么用的？
+
+见上一题
+
+6、Vuex 你怎么用的？
+
+[文档](https://vuex.vuejs.org/zh/)
+
+- 背下文档第一句：Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式
+- 说出核心概念的名字和作用：State/Getter/Mutation/Action/Module
+
+7、VueRouter 你怎么用的？
+
+[文档](https://router.vuejs.org/zh/)
+
+- 背下文档第一句：Vue Router 是 Vue.js 官方的路由管理器。
+- 说出核心概念的名字和作用：History 模式/导航守卫/路由懒加载
+- 说出常用 API：
+  - router-link
+  - router-view
+  - this.$router.push
+  - this.$router.replace
+  - this.$route.params
+
+```javascript
+this.$router.push('/user-admin')
+this.$route.params
+```
+
+8、路由守卫（导航守卫）是什么？
+
+“导航”表示路由正在发生改变，vue-router 提供的导航守卫主要用来通过跳转或取消的方式守卫导航。有多种机会植入路由导航过程中：全局的, 单个路由独享的, 或者组件级的
+
+> 简单的说，导航守卫就是路由跳转过程中的一些钩子函数。路由跳转是一个大的过程，这个大的过程分为跳转前中后等等细小的过程，在每一个过程中都有一函数，这个函数能让你操作一些其他的事儿，这就是导航守卫。类似于组件生命周期钩子函数
+
+## 第七部分：React
