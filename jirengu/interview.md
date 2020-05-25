@@ -762,5 +762,58 @@ this.$route.params;
 react-redux 库提供的一个 API，connect 的作用是让你把组件和store连接起来，产生一个新的组件（connect 是高阶组件）
 参考：https://segmentfault.com/a/1190000017064759
 
-第八部分：TypeScript
+## 第八部分：TypeScript
+
+1、never 类型是什么？
+
+不应该出现的类型
+
+2、TypeScript 比起 JavaScript 有什么优点？
+
+提供了类型约束，因此更可控、更容易重构、更适合大型项目、更容易维护
+
+## 第九部分：Webpack
+
+1、必考：有哪些常见 loader 和 plugin，你用过哪些？
+
+- loader
+  - file-loader：把文件输出到一个文件夹中，在代码中通过相对 URL 去引用输出的文件
+  - url-loader：和 file-loader 类似，但是能在文件很小的情况下以 base64 的方式把文件内容注入到代码中去
+  - source-map-loader：加载额外的 Source Map 文件，以方便断点调试
+  - image-loader：加载并且压缩图片文件
+  - babel-loader：把 ES6 转换成 ES5
+  - css-loader：加载 CSS，支持模块化、压缩、文件导入等特性
+  - style-loader：把 CSS 代码注入到 JavaScript 中，通过 DOM 操作去加载 CSS。
+  - eslint-loader：通过 ESLint 检查 JavaScript 代码
+
+- plugin
+  - html-webpack-plugin：创建一个 html 文件，并把 webpack 打包后的静态文件自动插入到这个 html 文件当中
+  - define-plugin：定义环境变量
+  - commons-chunk-plugin：提取公共代码
+  - uglifyjs-webpack-plugin：通过UglifyES压缩ES6代码
+
+2、英语题：loader 和 plugin 的区别是什么？
+
+- Loader直译为"加载器"。Webpack将一切文件视为模块，但是webpack原生是只能解析js文件，如果想将其他文件也打包的话，就会用到loader。 所以Loader的作用是让webpack拥有了加载和解析非JavaScript文件的能力。
+- Plugin直译为"插件"。Plugin可以扩展webpack的功能，让webpack具有更多的灵活性。 在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。
+
+3、必考：如何按需加载代码？
+
+通过import()语句来控制加载时机，webpack内置了对于import()的解析，会将import()中引入的模块作为一个新的入口在生成一个chunk。 当代码执行到import()语句时，会去加载Chunk对应生成的文件。import()会返回一个Promise对象，所以为了让浏览器支持，需要事先注入Promise polyfill
+
+4、必考：如何提高构建速度？
+
+- 多入口情况下，使用CommonsChunkPlugin来提取公共代码
+- 通过externals配置来提取常用库
+- 利用DllPlugin和DllReferencePlugin预编译资源模块 通过DllPlugin来对那些我们引用但是绝对不会修改的npm包来进行预编译，再通过DllReferencePlugin将预编译的模块加载进来。
+- 使用Happypack 实现多线程加速编译
+- 使用webpack-uglify-parallel来提升uglifyPlugin的压缩速度。 原理上webpack-uglify-parallel采用了多核并行压缩来提升压缩速度
+- 使用Tree-shaking和Scope Hoisting来剔除多余代码
+
+5、转义出的文件过大怎么办？如何利用webpack来优化前端性能？（提高性能和体验）
+
+- 压缩代码。删除多余的代码、注释、简化代码的写法等等方式。可以利用webpack的UglifyJsPlugin和ParallelUglifyPlugin来压缩JS文件， 利用cssnano（css-loader?minimize）来压缩css
+- 利用CDN加速。在构建过程中，将引用的静态资源路径修改为CDN上对应的路径。可以利用webpack对于output参数和各loader的publicPath参数来修改资源路径
+- 删除死代码（Tree Shaking）。将代码中永远不会走到的片段删除掉。可以通过在启动webpack时追加参数--optimize-minimize来实现
+- 提取公共代码
 
