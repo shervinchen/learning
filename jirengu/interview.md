@@ -258,18 +258,17 @@ Promise.race([promise1, promise2]).then(success1, fail1);
 ```javascript
 // 节流（一段时间执行一次之后，就不执行第二次）
 function throttle(fn, delay) {
-  let canUse = true;
+  let timer = null;
   return function () {
-    if (canUse) {
-      fn.apply(this, arguments);
-      canUse = false;
-      setTimeout(() => (canUse = true), delay);
+    const context = this;
+    if (!timer) {
+      timer = setTimeout(() => {
+        fn.apply(context, arguments);
+        timer = null;
+      }, delay);
     }
   };
 }
-const throttled = throttle(() => console.log("hi"));
-throttled();
-throttled();
 ```
 
 注意，有些地方认为节流函数不是立刻执行的，而是在冷却时间末尾执行的（相当于施法有吟唱时间），那样说也是对的。
@@ -279,21 +278,18 @@ throttled();
 ```javascript
 // 防抖（一段时间会等，然后带着一起做了）
 function debounce(fn, delay) {
-  let timerId = null;
+  let timer = null;
   return function () {
     const context = this;
-    if (timerId) {
-      window.clearTimeout(timerId);
+    if (timer) {
+      window.clearTimeout(timer);
     }
-    timerId = setTimeout(() => {
+    timer = setTimeout(() => {
       fn.apply(context, arguments);
-      timerId = null;
+      timer = null;
     }, delay);
   };
 }
-const debounced = debounce(() => console.log("hi"));
-debounced();
-debounced();
 ```
 
 4、必考：手写 AJAX
@@ -715,10 +711,10 @@ this.$route.params;
 参考答案：
 
 - constructor：组件构造函数，第一个被执行
-- render：React中最核心的方法，一个组件中必须要有这个方法
-- componentDidMount：组件装载之后调用，此时我们可以获取到DOM节点并操作，比如对canvas，svg的操作，服务器请求，订阅都可以写在这个里面，但是记得在componentWillUnmount中取消订阅
-- componentDidUpdate：在这个函数里我们可以操作DOM，和发起服务器请求，还可以setState，但是注意一定要用if语句控制，否则会导致无限循环
-- componentWillUnmount：当我们的组件被卸载或者销毁了就会调用，我们可以在这个函数里去清除一些定时器，取消网络请求，清理无效的DOM元素等垃圾清理工作
+- render：React 中最核心的方法，一个组件中必须要有这个方法
+- componentDidMount：组件装载之后调用，此时我们可以获取到 DOM 节点并操作，比如对 canvas，svg 的操作，服务器请求，订阅都可以写在这个里面，但是记得在 componentWillUnmount 中取消订阅
+- componentDidUpdate：在这个函数里我们可以操作 DOM，和发起服务器请求，还可以 setState，但是注意一定要用 if 语句控制，否则会导致无限循环
+- componentWillUnmount：当我们的组件被卸载或者销毁了就会调用，我们可以在这个函数里去清除一些定时器，取消网络请求，清理无效的 DOM 元素等垃圾清理工作
 
 3、必考：React 如何实现组件间通信？
 
@@ -757,7 +753,7 @@ this.$route.params;
 
 9、connect 的原理是什么？
 
-react-redux 库提供的一个 API，connect 的作用是让你把组件和store连接起来，产生一个新的组件（connect 是高阶组件）
+react-redux 库提供的一个 API，connect 的作用是让你把组件和 store 连接起来，产生一个新的组件（connect 是高阶组件）
 参考：https://segmentfault.com/a/1190000017064759
 
 ## 第八部分：TypeScript
@@ -775,6 +771,7 @@ react-redux 库提供的一个 API，connect 的作用是让你把组件和store
 1、必考：有哪些常见 loader 和 plugin，你用过哪些？
 
 - loader
+
   - file-loader：把文件输出到一个文件夹中，在代码中通过相对 URL 去引用输出的文件
   - url-loader：和 file-loader 类似，但是能在文件很小的情况下以 base64 的方式把文件内容注入到代码中去
   - source-map-loader：加载额外的 Source Map 文件，以方便断点调试
@@ -788,30 +785,29 @@ react-redux 库提供的一个 API，connect 的作用是让你把组件和store
   - html-webpack-plugin：创建一个 html 文件，并把 webpack 打包后的静态文件自动插入到这个 html 文件当中
   - define-plugin：定义环境变量
   - commons-chunk-plugin：提取公共代码
-  - uglifyjs-webpack-plugin：通过UglifyES压缩ES6代码
+  - uglifyjs-webpack-plugin：通过 UglifyES 压缩 ES6 代码
 
 2、英语题：loader 和 plugin 的区别是什么？
 
-- Loader直译为"加载器"。Webpack将一切文件视为模块，但是webpack原生是只能解析js文件，如果想将其他文件也打包的话，就会用到loader。 所以Loader的作用是让webpack拥有了加载和解析非JavaScript文件的能力。
-- Plugin直译为"插件"。Plugin可以扩展webpack的功能，让webpack具有更多的灵活性。 在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。
+- Loader 直译为"加载器"。Webpack 将一切文件视为模块，但是 webpack 原生是只能解析 js 文件，如果想将其他文件也打包的话，就会用到 loader。 所以 Loader 的作用是让 webpack 拥有了加载和解析非 JavaScript 文件的能力。
+- Plugin 直译为"插件"。Plugin 可以扩展 webpack 的功能，让 webpack 具有更多的灵活性。 在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。
 
 3、必考：如何按需加载代码？
 
-通过import()语句来控制加载时机，webpack内置了对于import()的解析，会将import()中引入的模块作为一个新的入口在生成一个chunk。 当代码执行到import()语句时，会去加载Chunk对应生成的文件。import()会返回一个Promise对象，所以为了让浏览器支持，需要事先注入Promise polyfill
+通过 import()语句来控制加载时机，webpack 内置了对于 import()的解析，会将 import()中引入的模块作为一个新的入口在生成一个 chunk。 当代码执行到 import()语句时，会去加载 Chunk 对应生成的文件。import()会返回一个 Promise 对象，所以为了让浏览器支持，需要事先注入 Promise polyfill
 
 4、必考：如何提高构建速度？
 
-- 多入口情况下，使用CommonsChunkPlugin来提取公共代码
-- 通过externals配置来提取常用库
-- 利用DllPlugin和DllReferencePlugin预编译资源模块 通过DllPlugin来对那些我们引用但是绝对不会修改的npm包来进行预编译，再通过DllReferencePlugin将预编译的模块加载进来。
-- 使用Happypack 实现多线程加速编译
-- 使用webpack-uglify-parallel来提升uglifyPlugin的压缩速度。 原理上webpack-uglify-parallel采用了多核并行压缩来提升压缩速度
-- 使用Tree-shaking和Scope Hoisting来剔除多余代码
+- 多入口情况下，使用 CommonsChunkPlugin 来提取公共代码
+- 通过 externals 配置来提取常用库
+- 利用 DllPlugin 和 DllReferencePlugin 预编译资源模块 通过 DllPlugin 来对那些我们引用但是绝对不会修改的 npm 包来进行预编译，再通过 DllReferencePlugin 将预编译的模块加载进来。
+- 使用 Happypack 实现多线程加速编译
+- 使用 webpack-uglify-parallel 来提升 uglifyPlugin 的压缩速度。 原理上 webpack-uglify-parallel 采用了多核并行压缩来提升压缩速度
+- 使用 Tree-shaking 和 Scope Hoisting 来剔除多余代码
 
-5、转义出的文件过大怎么办？如何利用webpack来优化前端性能？（提高性能和体验）
+5、转义出的文件过大怎么办？如何利用 webpack 来优化前端性能？（提高性能和体验）
 
-- 压缩代码。删除多余的代码、注释、简化代码的写法等等方式。可以利用webpack的UglifyJsPlugin和ParallelUglifyPlugin来压缩JS文件， 利用cssnano（css-loader?minimize）来压缩css
-- 利用CDN加速。在构建过程中，将引用的静态资源路径修改为CDN上对应的路径。可以利用webpack对于output参数和各loader的publicPath参数来修改资源路径
-- 删除死代码（Tree Shaking）。将代码中永远不会走到的片段删除掉。可以通过在启动webpack时追加参数--optimize-minimize来实现
+- 压缩代码。删除多余的代码、注释、简化代码的写法等等方式。可以利用 webpack 的 UglifyJsPlugin 和 ParallelUglifyPlugin 来压缩 JS 文件， 利用 cssnano（css-loader?minimize）来压缩 css
+- 利用 CDN 加速。在构建过程中，将引用的静态资源路径修改为 CDN 上对应的路径。可以利用 webpack 对于 output 参数和各 loader 的 publicPath 参数来修改资源路径
+- 删除死代码（Tree Shaking）。将代码中永远不会走到的片段删除掉。可以通过在启动 webpack 时追加参数--optimize-minimize 来实现
 - 提取公共代码
-
