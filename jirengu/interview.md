@@ -269,6 +269,12 @@ function throttle(fn, delay) {
     }
   };
 }
+window.addEventListener(
+  "scroll",
+  throttle(() => {
+    console.log("节流");
+  }, 1000)
+);
 ```
 
 注意，有些地方认为节流函数不是立刻执行的，而是在冷却时间末尾执行的（相当于施法有吟唱时间），那样说也是对的。
@@ -290,6 +296,12 @@ function debounce(fn, delay) {
     }, delay);
   };
 }
+window.addEventListener(
+  "scroll",
+  debounce(() => {
+    console.log("防抖");
+  }, 1000)
+);
 ```
 
 4、必考：手写 AJAX
