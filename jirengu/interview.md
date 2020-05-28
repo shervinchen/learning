@@ -952,3 +952,411 @@ function binarySearch(arr, low, high, key) {
 }
 ```
 
+## 第十二部分：手写一个 xxx
+
+都是一些常考的手写代码，这里只列出简单版实现
+
+1、实现一个双向数据绑定
+
+参考：
+https://juejin.im/post/5d26e368e51d4577407b1dd7
+https://juejin.im/post/5acd0c8a6fb9a028da7cdfaf
+
+```javascript
+let obj = {};
+let input = document.getElementById("input");
+let span = document.getElementById("span");
+// 数据劫持
+Object.defineProperty(obj, "text", {
+  configurable: true,
+  enumerable: true,
+  get() {
+    console.log("获取数据了");
+  },
+  set(newVal) {
+    console.log("数据更新了");
+    input.value = newVal;
+    span.innerHTML = newVal;
+  },
+});
+// 输入监听
+input.addEventListener("keyup", function (e) {
+  obj.text = e.target.value;
+});
+```
+
+2、实现一个简单路由
+
+参考：https://juejin.im/post/5ac61da66fb9a028c71eae1b
+
+```javascript
+// hash路由
+class Route {
+  constructor() {
+    // 路由存储对象
+    this.routes = {};
+    // 当前hash
+    this.currentHash = "";
+    // 绑定this，避免监听时this指向改变
+    this.freshRoute = this.freshRoute.bind(this);
+    // 监听
+    window.addEventListener("load", this.freshRoute, false);
+    window.addEventListener("hashchange", this.freshRoute, false);
+  }
+  // 存储
+  storeRoute(path, cb) {
+    this.routes[path] = cb || function () {};
+  }
+  // 更新
+  freshRoute() {
+    this.currentHash = location.hash.slice(1) || "/";
+    this.routes[this.currentHash]();
+  }
+}
+```
+
+3、实现懒加载
+
+```html
+<ul>
+  <li><img src="./imgs/default.png" data="./imgs/1.png" alt="" /></li>
+  <li><img src="./imgs/default.png" data="./imgs/2.png" alt="" /></li>
+  <li><img src="./imgs/default.png" data="./imgs/3.png" alt="" /></li>
+  <li><img src="./imgs/default.png" data="./imgs/4.png" alt="" /></li>
+  <li><img src="./imgs/default.png" data="./imgs/5.png" alt="" /></li>
+  <li><img src="./imgs/default.png" data="./imgs/6.png" alt="" /></li>
+  <li><img src="./imgs/default.png" data="./imgs/7.png" alt="" /></li>
+  <li><img src="./imgs/default.png" data="./imgs/8.png" alt="" /></li>
+  <li><img src="./imgs/default.png" data="./imgs/9.png" alt="" /></li>
+  <li><img src="./imgs/default.png" data="./imgs/10.png" alt="" /></li>
+</ul>
+```
+
+```javascript
+let imgs = document.querySelectorAll("img");
+// 可视区高度
+let clientHeight =
+  window.innerHeight ||
+  document.documentElement.clientHeight ||
+  document.body.clientHeight;
+function lazyLoad() {
+  // 滚动卷去的高度
+  let scrollTop =
+    window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    document.body.scrollTop;
+  for (let i = 0; i < imgs.length; i++) {
+    // 图片在可视区冒出的高度
+    let x = clientHeight + scrollTop - imgs[i].offsetTop;
+    // 图片在可视区内
+    if (x > 0 && x < clientHeight + imgs[i].height) {
+      imgs[i].src = imgs[i].getAttribute("data");
+    }
+  }
+}
+// addEventListener('scroll', lazyLoad) or setInterval(lazyLoad, 1000)
+```
+
+4、rem 基本设置
+
+```javascript
+// 提前执行，初始化 resize 事件不会执行
+setRem();
+// 原始配置
+function setRem() {
+  let doc = document.documentElement;
+  let width = doc.getBoundingClientRect().width;
+  // 假设设计稿为宽750，则rem为10px
+  let rem = width / 75;
+  doc.style.fontSize = rem + "px";
+}
+// 监听窗口变化
+addEventListener("resize", setRem);
+```
+
+5、手写实现 ajax
+
+```javascript
+// 实例化
+let xhr = new XMLHttpRequest();
+// 初始化
+xhr.open(method, url, async);
+// 发送请求
+xhr.send(data);
+// 设置状态变化回调处理请求结果
+xhr.onreadystatechange = () => {
+  if (xhr.readyStatus === 4 && xhr.status === 200) {
+    console.log(xhr.responseText);
+  }
+};
+```
+
+6、Object.create 的基本实现原理
+
+```javascript
+// 思路：将传入的对象作为原型
+function create(obj) {
+  function F() {}
+  F.prototype = obj;
+  return new F();
+}
+```
+
+7、instanceof 的原理
+
+```javascript
+// 思路：右边变量的原型存在于左边变量的原型链上
+function instanceOf(left, right) {
+  let leftValue = left.__proto__;
+  let rightValue = right.prototype;
+  while (true) {
+    if (leftValue === null) {
+      return false;
+    }
+    if (leftValue === rightValue) {
+      return true;
+    }
+    leftValue = leftValue.__proto__;
+  }
+}
+```
+
+8、实现一个 call 函数
+
+```javascript
+// 思路：将要改变this指向的方法挂到目标this上执行并返回
+Function.prototype.mycall = function (context) {
+  if (typeof this !== "function") {
+    throw new TypeError("not funciton");
+  }
+  context = context || window;
+  context.fn = this;
+  let arg = [...arguments].slice(1);
+  let result = context.fn(...arg);
+  delete context.fn;
+  return result;
+};
+```
+
+9、实现一个 apply 函数
+
+```javascript
+// 思路：将要改变this指向的方法挂到目标this上执行并返回
+Function.prototype.myapply = function (context) {
+  if (typeof this !== "function") {
+    throw new TypeError("not funciton");
+  }
+  context = context || window;
+  context.fn = this;
+  let result;
+  if (arguments[1]) {
+    result = context.fn(...arguments[1]);
+  } else {
+    result = context.fn();
+  }
+  delete context.fn;
+  return result;
+};
+```
+
+10、实现一个 bind 函数
+
+```javascript
+// 思路：类似call，但返回的是函数
+Function.prototype.mybind = function (context) {
+  if (typeof this !== "function") {
+    throw new TypeError("Error");
+  }
+  let _this = this;
+  let arg = [...arguments].slice(1);
+  return function F() {
+    // 处理函数使用new的情况
+    if (this instanceof F) {
+      return new _this(...arg, ...arguments);
+    } else {
+      return _this.apply(context, arg.concat(...arguments));
+    }
+  };
+};
+```
+
+11、实现 Promise
+
+参考：https://juejin.im/post/5b2f02cd5188252b937548ab
+
+```javascript
+// 未添加异步处理等其他边界情况
+// ①自动执行函数，②三个状态，③then
+class Promise {
+  constructor(fn) {
+    // 三个状态
+    this.state = "pending";
+    this.value = undefined;
+    this.reason = undefined;
+    let resolve = (value) => {
+      if (this.state === "pending") {
+        this.state = "fulfilled";
+        this.value = value;
+      }
+    };
+    let reject = (value) => {
+      if (this.state === "pending") {
+        this.state = "rejected";
+        this.reason = value;
+      }
+    };
+    // 自动执行函数
+    try {
+      fn(resolve, reject);
+    } catch (e) {
+      reject(e);
+    }
+  }
+  // then
+  then(onFulfilled, onRejected) {
+    switch (this.state) {
+      case "fulfilled":
+        onFulfilled(this.value);
+        break;
+      case "rejected":
+        onRejected(this.value);
+        break;
+      default:
+    }
+  }
+}
+```
+
+12、实现 new 方法
+
+```javascript
+/**
+ * 1. 创建一个新的对象
+ * 2. 链接到原型
+ * 3. 绑定this
+ * 4. 返回一个新的对象
+ */
+function create() {
+  let obj = {};
+  let Constructor = [].shift.call(arguments);
+  obj.__proto__ = Constructor.prototype;
+  let result = Constructor.apply(obj, arguments);
+  return typeof result === "object" ? result : obj;
+}
+```
+
+13、使用 setTimeout 模拟 setInterval
+
+```javascript
+// 可避免setInterval因执行时间导致的间隔执行时间不一致
+setTimeout(function () {
+  // do something
+  setTimeout(arguments.callee, 500);
+}, 500);
+```
+
+14、实现 LazyMan 类
+
+```javascript
+class LazyManClass {
+  constructor(name) {
+    this.name = name;
+    this.queue = [];
+    console.log(`Hi I am ${name}`);
+    setTimeout(() => {
+      this.next();
+    }, 0);
+  }
+  sleepFirst(time) {
+    const fn = () => {
+      setTimeout(() => {
+        console.log(`等待了${time}秒...`);
+        this.next();
+      }, time * 1000);
+    };
+    this.queue.unshift(fn);
+    return this;
+  }
+  sleep(time) {
+    const fn = () => {
+      setTimeout(() => {
+        console.log(`等待了${time}秒...`);
+        this.next();
+      }, time * 1000);
+    };
+    this.queue.push(fn);
+    return this;
+  }
+  eat(food) {
+    const fn = () => {
+      console.log(`I am eating ${food}`);
+      this.next();
+    };
+    this.queue.push(fn);
+    return this;
+  }
+  next() {
+    const fn = this.queue.shift();
+    fn && fn();
+  }
+}
+function LazyMan(name) {
+  return new LazyManClass(name);
+}
+
+LazyMan("Tony")
+  .eat("lunch")
+  .eat("dinner")
+  .sleepFirst(5)
+  .sleep(4)
+  .eat("junk food");
+```
+
+15、实现一个 EventEmitter
+
+```javascript
+class EventEmitter {
+  constructor() {
+    this.events = {};
+  }
+  on(name, fn) {
+    if (!this.events[name]) {
+      this.events[name] = [];
+    }
+    this.events[name].push(fn);
+  }
+  off(name, fn) {
+    if (this.events[name]) {
+      this.events[name] = this.events[name].filter((item) => item !== fn);
+    }
+  }
+  emit(name, ...args) {
+    if (this.events[name]) {
+      this.events[name].forEach((item) => item.apply(this, args));
+    }
+  }
+  once(name, fn) {
+    const only = () => {
+      fn.apply(this, arguments);
+      this.off(name, only);
+    };
+    this.on(name, only);
+  }
+}
+```
+
+16、实现一个 sleep 函数
+
+sleep 函数的作用就是延迟指定时间后再执行接下来的函数，用 promise 很好实现
+
+参考：https://segmentfault.com/a/1190000020848472
+
+```javascript
+function sleep(time) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(true);
+    }, time * 1000);
+  });
+}
+```
