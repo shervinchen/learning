@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.production.min.js"></script>
+    <script>
+      function App(props) {
+        return (
+          <div>
+            <Box1 name="frank" />
+            <Box2 name="jack" />
+          </div>
+        );
+      }
+
+      class Box1 extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            number: 0,
+          };
+        }
+        add() {
+          this.setState({
+            number: this.state.number + 1,
+          });
+        }
+        minus() {
+          this.setState({
+            number: this.state.number - 1,
+          });
+
+          this.state.number -= 1;
+          render();
+        }
+        render() {
+          return (
+            <div className="red">
+              <span>{this.state.number}</span>
+              <button onClick={this.add.bind(this)}>+</button>
+              <button onClick={this.minus.bind(this)}>-</button>
+              {this.props.name}
+            </div>
+          );
+        }
+      }
+
+      class Box2 extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            number: 0,
+          };
+        }
+        add() {
+          this.setState({
+            number: this.state.number + 2,
+          });
+        }
+        minus() {
+          this.setState({
+            number: this.state.number - 2,
+          });
+        }
+        render() {
+          return (
+            <div className="red">
+              <span>{this.state.number}</span>
+              <button onClick={this.add.bind(this)}>+2</button>
+              <button onClick={this.minus.bind(this)}>-2</button>
+              {this.props.name}
+            </div>
+          );
+        }
+      }
+
+      render();
+
+      function render() {
+        ReactDOM.render(
+          <App />, // React.createElement(App)
+          document.querySelector("#root")
+        );
+      }
+    </script>
+  </body>
+</html>
