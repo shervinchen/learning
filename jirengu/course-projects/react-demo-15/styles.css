@@ -1,0 +1,15 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.bordered {
+  border: 1px solid;
+  padding: 10px;
+}
+.box.green {
+  border: 1px solid green;
+}
+
+.box.red {
+  border: 1px solid red;
+}

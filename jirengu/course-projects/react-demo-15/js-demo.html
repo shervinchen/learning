@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.production.min.js"></script>
+    <script>
+      {
+        let context = {};
+        window.setContext = function (key, value) {
+          context[key] = value;
+        };
+        window.f1 = function f1() {
+          console.log(1);
+          f2();
+        };
+
+        function f2() {
+          console.log(2);
+          f3();
+        }
+
+        function f3() {
+          console.log(3);
+          f4();
+        }
+
+        function f4() {
+          console.log(4, context["n"]);
+        }
+      }
+
+      {
+        window.setContext("n", 100);
+        setTimeout(() => {
+          window.f1();
+        }, 1000);
+
+        console.log("done");
+      }
+    </script>
+  </body>
+</html>
