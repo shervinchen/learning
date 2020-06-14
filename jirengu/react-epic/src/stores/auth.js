@@ -4,7 +4,7 @@ class AuthStore {
   @observable isLogin = false
   @observable isLoading = false
   @observable values = {
-    username: '',
+    username: 'jirengu',
     password: ''
   }
 
@@ -45,4 +45,4 @@ class AuthStore {
   }
 }
 
-export default AuthStore
+export { AuthStore }
