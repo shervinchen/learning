@@ -2,6 +2,8 @@ import { observable, action } from "mobx";
 import { Auth } from "../models";
 import UserStore from "./user";
 import { message } from "antd";
+import HistoryStore from './history'
+import ImageStore from './image'
 
 class AuthStore {
   @observable values = {
@@ -50,6 +52,8 @@ class AuthStore {
   @action logout() {
     Auth.logout();
     UserStore.resetUser();
+    HistoryStore.reset()
+    ImageStore.reset()
   }
 }
 
