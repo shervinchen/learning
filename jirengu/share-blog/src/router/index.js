@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../views/Login/Login.vue'
-import Index from '../views/Index/Index.vue'
-import Detail from '../views/Detail/Detail.vue'
-import Create from '../views/Create/Create.vue'
-import Edit from '../views/Edit/Edit.vue'
-import Register from '../views/Register/Register.vue'
-import User from '../views/User/User.vue'
-import My from '../views/My/My.vue'
+import Login from '../views/Login/template.vue'
+import Index from '../views/Index/template.vue'
+import Detail from '../views/Detail/template.vue'
+import Create from '../views/Create/template.vue'
+import Edit from '../views/Edit/template.vue'
+import Register from '../views/Register/template.vue'
+import User from '../views/User/template.vue'
+import My from '../views/My/template.vue'
 
 Vue.use(VueRouter)
 
