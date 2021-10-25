@@ -1,0 +1,37 @@
+.frankDialog{
+  background: rgba(0,0,0,0.5);
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.frankDialog-wrapper{
+  background: white;
+  padding: 20px;
+  min-width: 200px;
+}
+
+.frankDialog-header{
+  border-bottom: 1px solid;
+}
+.frankDialog-main{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.frankDialog-footer{
+  text-align: right;
+}
+.frankDialog-footer button{
+  margin-left: 10px;
+}
+
+/*-----*/
+
+.userDialog{
+  z-index: 100;
+}
