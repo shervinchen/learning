@@ -1,0 +1,34 @@
+.frankSuggestion{
+  position: relative;
+  border: 1px solid red;
+  display: inline-block;
+}
+.frankSuggestion-loading{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+}
+.frankSuggestion.loading .frankSuggestion-loading{
+  display: block;
+}
+
+.frankSuggestion-list{
+  position: absolute;
+  border: 1px solid green;
+  top: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+.frankSuggestion.loading .frankSuggestion-list{
+  display: none;
+}
+.frankSuggestion.empty  .frankSuggestion-empty{
+  display: block;
+}
+.frankSuggestion-empty{
+  display: none;
+}
