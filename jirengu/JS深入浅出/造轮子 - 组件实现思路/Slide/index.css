@@ -1,0 +1,27 @@
+.frankSlides{
+  overflow: hidden;
+  position: relative;
+}
+.frankSlides ol{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  transition: transform 0.5s;
+}
+
+.frankSlides ol>li img{
+  vertical-align: top;
+}
+.frankSlides-prev{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.frankSlides-next{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
