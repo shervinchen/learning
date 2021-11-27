@@ -21,24 +21,50 @@ var server = http.createServer(function (request, response) {
 
   /******** 从这里开始看，上面不要看 ************/
 
-  console.log('有个傻子发请求过来啦！路径（带查询参数）为：' + pathWithQuery)
+  console.log('含查询字符串的路径\n' + pathWithQuery)
+  console.log('不含查询字符串的路径\n' + path)
 
-  if (path === '/') {
-    response.statusCode = 200
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')
-    response.write(`二哈`)
-    response.end()
-  } else if (path === '/x') {
-    response.statusCode = 200
-    response.setHeader('Content-Type', 'text/css;charset=utf-8')
-    response.write(`body{color: red;}`)
-    response.end()
-  } else {
-    response.statusCode = 404
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')
-    response.write(`你输入的路径不存在对应的内容`)
-    response.end()
+  // 可以不加后缀 因为已经通过content-type指定了响应类型
+  if (path === '/main.css') {
+    response.setHeader('Content-Type', 'text/css; charset=utf-8')
+    response.end('h1{color: red;}')
+  } else if (path === '/1.js') {
+    response.setHeader('Content-Type', 'application/javascript; charset=utf-8')
+    response.end('alert(1)')
+  } else if (path === '/2.html') {
+    response.setHeader('Content-Type', 'text/html; charset=utf-8')
+    response.end(`
+      <DOCTYPE! html>
+      <head>
+        <link rel="stylesheet" href="/main.css">
+      </head>
+      <h1>你好</h1>
+      <script src="/1.js"></script>
+    `)
+  } else if (path === '/3.json') {
+    response.setHeader('Content-Type', 'application/json; charset=utf-8')
+    response.end('{"name": "frank"}')
+  } else if (path === '/4.jsonp') {
+    response.setHeader('Content-Type', 'application/javascript; charset=utf-8')
+    response.end('alert({"name":"frank"})')
   }
+
+  // if (path === '/') {
+  //   response.statusCode = 200
+  //   response.setHeader('Content-Type', 'text/html;charset=utf-8')
+  //   response.write(`二哈`)
+  //   response.end()
+  // } else if (path === '/x') {
+  //   response.statusCode = 200
+  //   response.setHeader('Content-Type', 'text/css;charset=utf-8')
+  //   response.write(`body{color: red;}`)
+  //   response.end()
+  // } else {
+  //   response.statusCode = 404
+  //   response.setHeader('Content-Type', 'text/html;charset=utf-8')
+  //   response.write(`你输入的路径不存在对应的内容`)
+  //   response.end()
+  // }
 
   /******** 代码结束，下面不要看 ************/
 })
