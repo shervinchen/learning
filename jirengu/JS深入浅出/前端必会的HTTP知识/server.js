@@ -40,6 +40,15 @@ var server = http.createServer(function (request, response) {
       </head>
       <h1>你好</h1>
       <script src="/1.js"></script>
+      <script>
+        let request = new XMLHttpRequest()
+        request.open('GET', '/3.json')
+        request.onload = function() {
+          console.log(request.responseText)
+          console.log(JSON.parse(request.responseText))
+        }
+        request.send()
+      </script>
     `)
   } else if (path === '/3.json') {
     response.setHeader('Content-Type', 'application/json; charset=utf-8')
@@ -79,3 +88,13 @@ console.log(
 
 // node server.js 8888
 // curl -v http://127.0.0.1:8888
+
+/*********** Content-Type 类型 ***************/
+// CSS text/css
+// JS text/javascript application/javascript
+// HTML text/html
+// XML text/xml application/xml text/xml+html
+// JSON text/json application/json
+// PNG image/png
+// JPEG image/jpeg
+// GIF image/gif
