@@ -8,6 +8,8 @@ if (!port) {
   process.exit(1)
 }
 
+const session = {}
+
 var server = http.createServer(function (request, response) {
   var parsedUrl = url.parse(request.url, true)
   var pathWithQuery = request.url
@@ -24,39 +26,114 @@ var server = http.createServer(function (request, response) {
   console.log('含查询字符串的路径\n' + pathWithQuery)
   console.log('不含查询字符串的路径\n' + path)
 
-  // 可以不加后缀 因为已经通过content-type指定了响应类型
-  if (path === '/main.css') {
-    response.setHeader('Content-Type', 'text/css; charset=utf-8')
-    response.end('h1{color: red;}')
-  } else if (path === '/1.js') {
-    response.setHeader('Content-Type', 'application/javascript; charset=utf-8')
-    response.end('alert(1)')
-  } else if (path === '/2.html') {
+  if (path === '/') {
     response.setHeader('Content-Type', 'text/html; charset=utf-8')
-    response.end(`
-      <DOCTYPE! html>
-      <head>
-        <link rel="stylesheet" href="/main.css">
-      </head>
-      <h1>你好</h1>
-      <script src="/1.js"></script>
-      <script>
-        let request = new XMLHttpRequest()
-        request.open('GET', '/3.json')
-        request.onload = function() {
-          console.log(request.responseText)
-          console.log(JSON.parse(request.responseText))
-        }
-        request.send()
-      </script>
-    `)
-  } else if (path === '/3.json') {
-    response.setHeader('Content-Type', 'application/json; charset=utf-8')
-    response.end('{"name": "frank"}')
-  } else if (path === '/4.jsonp') {
+    let cookie = request.headers['cookie'] // sessionid=????
+    let login = false
+    if (cookie) {
+      let sessionId = cookie.split('=')[1]
+      if (session[sessionId]?.login) {
+        login = true
+      }
+    }
+    let html = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <link rel="stylesheet" href="/style">
+        </head>
+        <body>
+          <h1>__hi__</h1>
+          <form action="/login" method="get">
+            <input type="password" name="password">
+            <input type="submit">
+          </form>
+          <script src="/script"></script>
+        </body>
+      </html>
+    `
+    if (login) {
+      html = html.replace('__hi__', '你好，登录用户')
+    } else {
+      html = html.replace('__hi__', '你好')
+    }
+    response.write(html)
+    response.end()
+  } else if (path === '/style?random=2') {
+    // let ifNoneMatch = request.headers['if-none-match']
+    // let css = 'h1{color: red;}'
+    // let etag = md5(css)
+    // if (ifNoneMatch === etag) {
+    //   response.statusCode = 304
+    //   response.end()
+    // } else {
+    //   response.setHeader('Content-Type', 'text/css; charset=utf-8')
+    //   // response.setHeader('Cache-Control', 'max-age=10')
+    //   response.setHeader('Etag', etag)
+    //   response.write(css)
+    //   response.end()
+    // }
+    response.setHeader('Content-Type', 'text/css; charset=utf-8')
+    response.write('h1{color: red;}')
+    response.end()
+  } else if (path === '/script') {
     response.setHeader('Content-Type', 'application/javascript; charset=utf-8')
-    response.end('alert({"name":"frank"})')
+    response.write(`
+      console.log('我是 JS')
+    `)
+    response.end()
+  } else if (path === '/login') {
+    response.setHeader('Content-Type', 'text/plain; charset=utf-8')
+    if (query.password === 'frank') {
+      let random = Math.random()
+      response.setHeader('Set-Cookie', `sessionid=${random}`)
+      session[random] = {
+        login: true
+      }
+    }
+    response.end()
+  } else if (path === '/logout') {
+    let d = new Date(0)
+    response.setHeader('Set-Cookie', `login=true; Expires=${d.toGMTString()}`)
+    response.end()
+  } else {
+    response.setHeader('Content-Type', 'text/plain; charset=utf-8')
+    response.end('你请求的资源不存在')
   }
+
+  // 可以不加后缀 因为已经通过content-type指定了响应类型
+  // if (path === '/main.css') {
+  //   response.setHeader('Content-Type', 'text/css; charset=utf-8')
+  //   response.end('h1{color: red;}')
+  // } else if (path === '/1.js') {
+  //   response.setHeader('Content-Type', 'application/javascript; charset=utf-8')
+  //   response.end('alert(1)')
+  // } else if (path === '/2.html') {
+  //   response.setHeader('Content-Type', 'text/html; charset=utf-8')
+  //   response.end(`
+  //     <!DOCTYPE html>
+  //     <head>
+  //       <link rel="stylesheet" href="/main.css">
+  //     </head>
+  //     <h1>你好</h1>
+  //     <script src="/1.js"></script>
+  //     <script>
+  //       let request = new XMLHttpRequest()
+  //       request.open('GET', '/3.json')
+  //       request.onload = function() {
+  //         console.log(request.responseText)
+  //         console.log(JSON.parse(request.responseText))
+  //       }
+  //       request.send()
+  //     </script>
+  //   `)
+  // } else if (path === '/3.json') {
+  //   response.setHeader('Content-Type', 'application/json; charset=utf-8')
+  //   response.end('{"name": "frank"}')
+  // } else if (path === '/4.jsonp') {
+  //   response.setHeader('Content-Type', 'application/javascript; charset=utf-8')
+  //   response.end('alert({"name":"frank"})')
+  // }
 
   // if (path === '/') {
   //   response.statusCode = 200
