@@ -53,3 +53,5 @@ if (process.argv.length === 2) {
 
 // task add myTask
 // task --version
+
+// yarn test
