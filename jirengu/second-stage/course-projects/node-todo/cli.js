@@ -55,3 +55,6 @@ if (process.argv.length === 2) {
 // task --version
 
 // yarn test
+
+// node --inspect-brk cli.js add task 200
+// debugger
