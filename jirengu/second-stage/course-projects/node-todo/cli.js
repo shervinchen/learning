@@ -56,5 +56,5 @@ if (process.argv.length === 2) {
 
 // yarn test
 
-// node --inspect-brk cli.js add task 200
 // debugger
+// node --inspect-brk cli.js add task 200
