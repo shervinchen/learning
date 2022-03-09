@@ -1,0 +1,29 @@
+docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:5.7.28 启动新容器
+
+docker ps 查看容器运行状态
+
+docker kill test-mysql 关掉容器
+
+docker container run test-mysql 开启刚关掉的容器
+
+docker rm test-mysql 删掉容器，必要时可加-f选项
+
+
+
+docker exec -it test-mysql bash 进入容器，容器里有一个Linux系统
+mysql -u root -p 在容器里运行mysql
+show databases; 查看数据库列表
+create database xxx;
+use mysql; 选择使用 某个 数据库
+show tables; 查看所有表
+select * from user; 查看表内容
+describe user;
+DROP table user; 删除一个表
+insert into user (name, age) values ('frank', 18);
+delete from user where name = 'jack';
+update user set age=70 where name='frank';
+select name,age from user;
+alter table user add id serial;
+
+ctrl + C 中断
+ctrl + D 退出
