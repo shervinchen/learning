@@ -4,6 +4,7 @@ docker ps 查看容器运行状态
 
 docker kill test-mysql 关掉容器
 
+docker container start test-mysql
 docker container run test-mysql 开启刚关掉的容器
 
 docker rm test-mysql 删掉容器，必要时可加-f选项

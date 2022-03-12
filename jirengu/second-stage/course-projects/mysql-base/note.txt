@@ -1,0 +1,29 @@
+CREATE DATABASE db1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+show databases;
+use db1;
+
+create table users(id serial, name text);
+create table staffs(id serial, name text);
+create table orders(id serial, user_id bigint unsigned, staff_id bigint unsigned, amount int unsigned);
+
+show tables;
+
+insert into users (name) values ('XiaoMing');
+insert into staffs (name) values ('XiaoHong');
+insert into orders(user_id,staff_id, amount) values (1,1, 100);
+
+select * from users;
+select * from staffs;
+select * from orders;
+
+select users.name as uname, orders.amount as amount from users inner join orders on users.id = orders.user_id;
+
+start transaction;
+xxxx
+xxxx
+commit;
+
+show engines;
+
+create unique index index1 on users(name(100));
+show index in users;
