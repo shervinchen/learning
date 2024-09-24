@@ -2,7 +2,6 @@ import * as http from 'http';
 import { IncomingMessage, ServerResponse } from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as url from 'url';
 
 const server = http.createServer();
 const publicDir = path.resolve(__dirname, 'public');
@@ -29,8 +28,8 @@ server.on('request', (request: IncomingMessage, response: ServerResponse) => {
   //   response.end();
   // });
 
-  const { method, url: _url, headers } = request;
-  const { pathname, search } = url.parse(_url);
+  const { method, url } = request;
+  const { pathname } = new URL(url, `http://${request.headers.host}`);
 
   if (method !== 'GET') {
     response.statusCode = 405;
@@ -38,7 +37,7 @@ server.on('request', (request: IncomingMessage, response: ServerResponse) => {
     return;
   }
 
-  let filename = pathname.substr(1);
+  let filename = pathname.substring(1);
   // response.setHeader('Content-Type', 'text/html; charset=utf-8');
   if (filename === '') {
     filename = 'index.html';
@@ -67,7 +66,7 @@ server.on('request', (request: IncomingMessage, response: ServerResponse) => {
 
 server.listen(8888);
 
-// ts-node-dev index.ts
+// tsx ./index.ts
 // curl -v http://localhost:8888
 // curl -v -d "name=csdoker" http://localhost:8888
 
