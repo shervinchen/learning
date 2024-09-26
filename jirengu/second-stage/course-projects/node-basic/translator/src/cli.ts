@@ -16,12 +16,12 @@ program
 
 program.parse(process.argv);
 
-// ts-node-dev src/cli.ts -h
-// ts-node-dev src/cli.ts -V
-// yarn start
+// tsx src/cli.ts -h
+// tsx src/cli.ts -V
+// pnpm start
+// pnpm build
 
-// ts-node-dev src/cli.ts xxx
-// tsc
+// tsx src/cli.ts xxx
 
 // npm publish
 // fy xxx
@@ -30,5 +30,5 @@ program.parse(process.argv);
 
 // 在本地运行
 // vi ~/.bashrc
-// alias f="ts-node-dev /mnt/d/Projects/learning/jirengu/second-stage/course-projects/translator/src/cli.ts"
+// alias f="tsx /mnt/d/Projects/learning/jirengu/second-stage/course-projects/translator/src/cli.ts"
 // source ~/.bashrc
