@@ -1,6 +1,9 @@
-var mysql = require('mysql');
+// node index.js
+
+var mysql = require('mysql2');
 var connection = mysql.createConnection({
   host: 'localhost',
+  port: '3307',
   user: 'root',
   password: '123456',
   // database: 'my_db',
@@ -9,7 +12,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 connection.query(
-  'CREATE DATABASE IF NOT EXISTS nodemysql DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_520_ci;',
+  'CREATE DATABASE IF NOT EXISTS nodemysql DEFAULT CHARSET utf8mb4;',
   function (error, results, fields) {
     if (error) throw error;
     console.log(results);

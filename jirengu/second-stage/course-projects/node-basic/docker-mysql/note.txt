@@ -1,4 +1,7 @@
-docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:5.7.28 启动新容器
+docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest 启动新容器
+
+连接本地端口到容器端口，在dbeaver里查看：
+docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3307:3306 -d mysql:latest
 
 docker ps 查看容器运行状态
 
@@ -9,10 +12,14 @@ docker container run test-mysql 开启刚关掉的容器
 
 docker rm test-mysql 删掉容器，必要时可加-f选项
 
-
+持久化容器：搜索“docker mysql 数据目录”
 
 docker exec -it test-mysql bash 进入容器，容器里有一个Linux系统
+
+mysql文档：https://dev.mysql.com/doc/refman/8.4/en/connecting-disconnecting.html
+
 mysql -u root -p 在容器里运行mysql
+
 show databases; 查看数据库列表
 create database xxx;
 use mysql; 选择使用 某个 数据库
@@ -24,6 +31,7 @@ insert into user (name, age) values ('frank', 18);
 delete from user where name = 'jack';
 update user set age=70 where name='frank';
 select name,age from user;
+select count(name) from user;
 alter table user add id serial;
 
 ctrl + C 中断
